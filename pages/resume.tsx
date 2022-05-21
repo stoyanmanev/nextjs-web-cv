@@ -1,10 +1,26 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import HeaderContainer from "../components/HeaderContainer";
-import HomeSectionContainer from "../components/main/HomeSectionContainer";
+import ResumeSectionContainer from "../components/main/ResumeSectionContainer";
 import { user } from "../db/user";
+import { User } from "../interfaces/User";
 
-const Home: NextPage = () => {
+const Resume: NextPage = () => {
+  const componetForRendering = (user: User) => {
+    if (user.personalPath && user.abilities) {
+      return (
+        <ResumeSectionContainer
+          paths={user.personalPath}
+          abilities={user.abilities}
+        />
+      );
+    } else if (user.personalPath && !user.abilities) {
+      return <ResumeSectionContainer paths={user.personalPath} />;
+    } else {
+      return <ResumeSectionContainer abilities={user.abilities} />;
+    }
+  };
+
   return (
     <div>
       <Head>
@@ -21,7 +37,7 @@ const Home: NextPage = () => {
             <main>
               <div className="content-area">
                 <div className="animated-sections">
-                  <HomeSectionContainer user={user} />
+                  {componetForRendering(user)}
                 </div>
               </div>
             </main>
@@ -32,4 +48,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Resume;

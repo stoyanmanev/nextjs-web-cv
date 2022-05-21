@@ -1,10 +1,10 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import HeaderContainer from "../components/HeaderContainer";
-import HomeSectionContainer from "../components/main/HomeSectionContainer";
+import AboutMeSectionContainer from "../components/main/AboutMeSectionContainer";
 import { user } from "../db/user";
 
-const Home: NextPage = () => {
+const About: NextPage = () => {
   return (
     <div>
       <Head>
@@ -21,7 +21,7 @@ const Home: NextPage = () => {
             <main>
               <div className="content-area">
                 <div className="animated-sections">
-                  <HomeSectionContainer user={user} />
+                  <AboutMeSectionContainer user={user} />
                 </div>
               </div>
             </main>
@@ -32,4 +32,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default About;
