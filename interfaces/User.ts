@@ -3,6 +3,7 @@ import { Document } from "./Document";
 import { Facts } from "./Facts";
 import { PersonalPath } from "./PersonalPath";
 import { Abilities } from "./Abilities";
+import { News } from "./News";
 
 export interface User {
   fullname: string;
@@ -11,6 +12,8 @@ export interface User {
   phone?: string;
   age?: number;
   img?: string;
+  googleIframe?: string;
+  form: boolean;
   residence?: string;
   address?: string;
   description?: string;
@@ -19,4 +22,5 @@ export interface User {
   personalPath?: PersonalPath[];
   documents?: Document;
   abilities?: Abilities;
+  blog?: News[];
 }

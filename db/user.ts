@@ -8,7 +8,9 @@ export const user: User = {
   phone: "+359 87 902 2343",
   residence: "Bulgaria",
   address: 'ul. "Ilarion Makariopolski" 4000 Kamenitsa 1, Plovdiv',
+  googleIframe: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2958.22995681631!2d24.7600977!3d42.1453657!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14acd1a0ea5423df%3A0xc67bc07450fea7f0!2z0YPQuy4g4oCe0JjQu9Cw0YDQuNC-0L0g0JzQsNC60LDRgNC40L7Qv9C-0LvRgdC60LjigJwgMSwgNDAwMCDQmtCw0LzQtdC90LjRhtCwIDEsINCf0LvQvtCy0LTQuNCy!5e0!3m2!1sbg!2sbg!4v1653239024584!5m2!1sbg!2sbg',
   age: 23,
+  form: true,
   social: {
     linkenid:
       "https://bg.linkedin.com/in/stoyan-manev-137913186?trk=people-guest_people_search-card",
@@ -135,6 +137,44 @@ export const user: User = {
       },
     ],
   },
+  blog: [
+    {
+      title: "Why I Switched to Sketch For UI Design",
+      category: "Design",
+      date: "05 Mar 2020",
+      image: "/blog_post_1.jpg",
+      keywords: ["animate","bar", "design", "progress", "ui"],
+      createdBy: 'Stoyan Manev',
+      description: "Nulla nulla nisl, sodales ac nulla ac, consequat vulputate purus. Curabitur tincidunt ipsum vel nibh rutrum accumsan. Nunc ullamcorper posuere leo, vitae aliquet risus pharetra in. Integer turpis eros, iaculis et mi non, pulvinar egestas leo. Etiam sagittis ex turpis, vitae cursus tortor interdum eu. Quisque ultrices nunc eget erat vestibulum euismod. Ut mauris nisi, facilisis at arcu nec, facilisis porttitor lorem. Vivamus vitae neque molestie, porta libero sed, tincidunt leo. In nec posuere odio, id rhoncus lorem. Proin id erat ut dolor condimentum viverra. Praesent viverra sed dolor ac luctus. Praesent placerat id lorem quis lacinia."
+    },
+    {
+      title: "Best Practices for Animated Progress Indicators",
+      category: "UI",
+      date: "23 Feb 2020",
+      image: "/blog_post_1.jpg",
+      keywords: ["animate", "ui"],
+      createdBy: 'Stoyan Manev',
+      description: "Nulla nulla nisl, sodales ac nulla ac, consequat vulputate purus. Curabitur tincidunt ipsum vel nibh rutrum accumsan. Nunc ullamcorper posuere leo, vitae aliquet risus pharetra in. Integer turpis eros, iaculis et mi non, pulvinar egestas leo. Etiam sagittis ex turpis, vitae cursus tortor interdum eu. Quisque ultrices nunc eget erat vestibulum euismod. Ut mauris nisi, facilisis at arcu nec, facilisis porttitor lorem. Vivamus vitae neque molestie, porta libero sed, tincidunt leo. In nec posuere odio, id rhoncus lorem. Proin id erat ut dolor condimentum viverra. Praesent viverra sed dolor ac luctus. Praesent placerat id lorem quis lacinia."
+    },
+    {
+      title: "Designing the Perfect Feature Comparison Table",
+      category: "Design",
+      date: "06 Feb 2021",
+      image: "/blog_post_1.jpg",
+      keywords: ["design", "progress"],
+      createdBy: 'Stoyan Manev',
+      description: "Nulla nulla nisl, sodales ac nulla ac, consequat vulputate purus. Curabitur tincidunt ipsum vel nibh rutrum accumsan. Nunc ullamcorper posuere leo, vitae aliquet risus pharetra in. Integer turpis eros, iaculis et mi non, pulvinar egestas leo. Etiam sagittis ex turpis, vitae cursus tortor interdum eu. Quisque ultrices nunc eget erat vestibulum euismod. Ut mauris nisi, facilisis at arcu nec, facilisis porttitor lorem. Vivamus vitae neque molestie, porta libero sed, tincidunt leo. In nec posuere odio, id rhoncus lorem. Proin id erat ut dolor condimentum viverra. Praesent viverra sed dolor ac luctus. Praesent placerat id lorem quis lacinia."
+    },
+    {
+      title: "An Overview of E-Commerce Platforms",
+      category: "UI",
+      date: "07 Jan 2020",
+      image: "/blog_post_1.jpg",
+      keywords: ["animate", "progress", "ui"],
+      createdBy: 'Stoyan Manev',
+      description: "Nulla nulla nisl, sodales ac nulla ac, consequat vulputate purus. Curabitur tincidunt ipsum vel nibh rutrum accumsan. Nunc ullamcorper posuere leo, vitae aliquet risus pharetra in. Integer turpis eros, iaculis et mi non, pulvinar egestas leo. Etiam sagittis ex turpis, vitae cursus tortor interdum eu. Quisque ultrices nunc eget erat vestibulum euismod. Ut mauris nisi, facilisis at arcu nec, facilisis porttitor lorem. Vivamus vitae neque molestie, porta libero sed, tincidunt leo. In nec posuere odio, id rhoncus lorem. Proin id erat ut dolor condimentum viverra. Praesent viverra sed dolor ac luctus. Praesent placerat id lorem quis lacinia."
+    }
+  ],
   description:
     "Fusce vel dui placerat, accumsan lacus sit amet, tempor massa. In finibus quam id enim aliquam, vel commodo orci imperdiet. Proin eget convallis nibh, at interdum urna. Sed eu tempus felis. Etiam accumsan, tortor sed euismod luctus, est neque gravida urna, at consectetur libero ligula nec dui. Sed vitae ante fermentum, ultrices purus eu, ultrices nulla. Pellentesque consequat suscipit ante. Nam mollis ac orci vitae ornare. Etiam auctor felis vel tristique euismod. In hac habitasse platea dictumst. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam ac sagittis sapien, nec commodo eros. Etiam non tortor condimentum, consequat lorem ac, posuere urna. Maecenas eget diam tincidunt, volutpat leo quis, volutpat lectus.",
 };
