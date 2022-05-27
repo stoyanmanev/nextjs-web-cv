@@ -7,12 +7,17 @@ interface Props {
 }
 
 const BlogCreateNews: React.FC<Props> = ({ user }) => {
-  const [file, setFile] = useState<any>();
-
+  const [file, setFile] = useState<any>('');
+  const changeHandler = (e: any) => {
+    e.preventDefault();
+    setFile(e.target.files[0]);
+  };
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const fd = new FormData();
+    fd.append('image', file, file?.name);
     console.log(file)
-  };
+  }
 
   return (
     <div className="blog-form-container">
@@ -20,8 +25,7 @@ const BlogCreateNews: React.FC<Props> = ({ user }) => {
         <Form.Group>
           <Form.Control
             type="file"
-            value={file}
-            onChange={(e) => {setFile(e.target.value)}}
+            onChange={(e) => {changeHandler(e)}}
             placeholder="Submit File"
           />
         </Form.Group>
