@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { User } from "../../interfaces/User";
+import { User } from "../../generated/graphql";
 
 interface Props {
   user: User;

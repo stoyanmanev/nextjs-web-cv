@@ -1,0 +1,171 @@
+query Users{
+  users{
+    _id,
+    fullname,
+    email,
+    position,
+    age
+  }
+}
+
+query User($id: String!){
+  user(_id: $id){
+    _id,
+    fullname,
+    email,
+    password,
+    position,
+  	img,
+  	phone,
+  	residence,
+  	address,
+  	googleIframe,
+  	age,
+  	form,
+  	description,
+    documents {
+      cv
+    },
+    facts {
+      name, 
+      value
+    },
+    personalPath {
+      headline,
+      pieces {
+        year,
+        location,
+        type,
+        description
+      }
+    },
+    abilities {
+      knowledges,
+    	skills
+    },
+    portfolio {
+      name, 
+      category,
+      image,
+      link
+    }
+  }
+}
+
+query currentUser{
+  currentUser{
+    _id,
+    fullname,
+    email,
+    password,
+    position,
+  	img,
+  	phone,
+  	residence,
+  	address,
+  	googleIframe,
+  	age,
+  	form,
+  	description,
+    documents {
+      cv
+    },
+    facts {
+      name, 
+      value
+    },
+    personalPath {
+      headline,
+      pieces {
+        year,
+        location,
+        type,
+        description
+      }
+    },
+    abilities {
+      knowledges,
+    	skills
+    },
+    portfolio {
+      name, 
+      category,
+      image,
+      link
+    }
+  }
+}
+
+mutation CreateUser($data: CreateUserInput!){
+  createUser(data: $data) {
+    _id,
+    fullname,
+    email,
+  }
+}
+
+mutation DeleteUser($id: String!){
+  deleteUser(_id: $id) {
+    _id,
+    fullname,
+    email
+  }
+}
+
+
+mutation EditUser($id: String!, $data: EditUserInput!){
+  editUser(_id: $id, data: $data) {
+    _id,
+    fullname,
+    email,
+    password,
+    position,
+  	img,
+  	phone,
+  	residence,
+  	address,
+  	googleIframe,
+  	age,
+  	form,
+  	description,
+    documents {
+      cv
+    },
+    facts {
+      name, 
+      value
+    },
+    personalPath {
+      headline,
+      pieces {
+        year,
+        location,
+        type,
+        description
+      }
+    },
+    abilities {
+      knowledges,
+    	skills
+    },
+    portfolio {
+      name, 
+      category,
+      image,
+      link
+    }
+  }
+}
+
+
+mutation Login($email: String!, $password: String!){
+    login(email: $email, password: $password)
+}
+
+mutation Logout{
+    logout{
+      _id
+    }
+}
+
+

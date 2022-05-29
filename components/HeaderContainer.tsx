@@ -1,9 +1,9 @@
-import { User } from "../interfaces/User";
 import HeaderItem from "./HeaderItem";
 import MainMenuContainer from "./MainMenuContainer";
 import SocialLinksContainer from "./SocialLinksContainer";
 import HeaderButtonsContainer from "./HeaderButtonsContainer";
 import CopyrightsContainer from "./CopyrightsContainer";
+import { User } from "../generated/graphql";
 
 interface Props {
   user: User;
@@ -16,8 +16,8 @@ const HeaderContainer: React.FC<Props> = ({ user }) => {
         <HeaderItem user={user} />
       </div>
       <MainMenuContainer />
-      {user?.social && <SocialLinksContainer social={user.social} />}
-      {user?.documents && <HeaderButtonsContainer documents={user.documents} />}
+      {/* {user?.social && <SocialLinksContainer social={user.social} />} */}
+      {/* {user?.documents && <HeaderButtonsContainer documents={user.documents} />} */}
       <CopyrightsContainer />
     </header>
   );

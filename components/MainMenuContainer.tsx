@@ -1,6 +1,7 @@
 import {
   faBook,
   faEnvelope,
+  faGear,
   faGraduationCap,
   faHouseChimneyWindow,
   faSuitcase,
@@ -67,6 +68,15 @@ const MainMenuContainer: React.FC = () => {
                 className="menu-icon lnr lnr-envelope"
               />
               <span className="link-text">Contact</span>
+            </div>
+          </Link>
+          <Link href="/settings">
+            <div className="link">
+              <FontAwesomeIcon
+                icon={faGear}
+                className="menu-icon lnr lnr-settings"
+              />
+              <span className="link-text">Settings</span>
             </div>
           </Link>
         </div>

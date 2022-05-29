@@ -136,6 +136,42 @@ header {
     font-size: 12px;
     text-align: center;
   }
+  &#site_header_register{
+    display: flex;
+    flex-direction: column;
+    padding-top: 192px;
+    .header-titles{
+      margin-bottom: $base-line-height
+    }
+    form{
+      .input-group{
+        border: 1px solid $light;
+        background-color: transparent;
+        margin-bottom: 16px !important;
+        border-radius: 10px;
+        font-size: 12px;
+        line-height: 22px;
+      }
+      .input-group-text{
+        font-size: 12px;
+        line-height: 22px;
+        color: $light;
+        width: 100%;
+        max-width: 129px;
+        background-color: transparent !important;
+      }
+      input{
+        font-size: 13px;
+        line-height: 20px;
+        background-color: transparent !important;
+        color: $light;
+        opacity: 1;
+      }
+      ::placeholder{
+        color: $light;
+      }
+    }
+  }
 }
 
 main {
@@ -1141,6 +1177,67 @@ main {
       *{
         margin-bottom: 0;
       }
+    }
+  }
+  [data-id="login"] {
+    form{
+      .input-group{
+        border: 1px solid $light;
+        background-color: transparent;
+        margin-bottom: 16px !important;
+        border-radius: 10px;
+        font-size: 12px;
+        line-height: 22px;
+        .form-control{
+          &:focus{
+            color: $light;
+          }
+        }
+      }
+      .input-group-text{
+        font-size: 12px;
+        line-height: 22px;
+        color: $light;
+        width: 100%;
+        max-width: 129px;
+        background-color: transparent !important;
+      }
+      input{
+        font-size: 13px;
+        line-height: 20px;
+        background-color: transparent !important;
+        color: $light;
+        opacity: 1;
+      }
+      ::placeholder{
+        color: $light;
+      }
+    }
+    .section-content{
+      padding-top: 132px;
+    }
+    .content-centered{
+      text-align: center;
+    }
+    
+  }
+  [data-id="settings"]{
+    .setting-type{
+      display: flex;
+      align-items: center;
+      .btn{
+        margin-bottom: 0;
+      }
+      .editable-container{
+        .editable-input{
+          height: 46px;
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+    .b-radius-100{
+      border-radius: 100%;
     }
   }
 }

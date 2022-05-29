@@ -1,0 +1,46 @@
+query Newses {
+  newses {
+    _id
+    title
+    category
+    date
+    image
+    keywords
+    createdBy
+    description
+  }
+}
+
+query News($id: String!) {
+  news(_id: $id) {
+    _id
+    title
+    category
+    date
+    image
+    keywords
+    createdBy
+    description
+  }
+}
+
+mutation createNews($data: NewsInput!) {
+  createNews(data: $data) {
+    _id
+    title
+    category
+    date
+    image
+    keywords
+    createdBy
+    description
+  }
+}
+
+mutation DeleteNews($id: String!){
+  deleteNews(_id: $id) {
+    _id,
+    title,
+    category
+  }
+}

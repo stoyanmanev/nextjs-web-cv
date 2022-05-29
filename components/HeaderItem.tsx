@@ -1,16 +1,17 @@
 import React from "react";
 import Image from "next/image";
-import { User } from "../interfaces/User";
+import { User } from "../generated/graphql";
 
 interface Props {
   user: User;
 }
 
 const HeaderItem: React.FC<Props> = ({ user }) => {
+  console.log(user.img)
   return (
     <>
       {user.img && <div className="header-photo">
-         <Image src={user.img} width={180} height={180} alt={user.fullname} />
+         <img src={user.img} width={180} height={180} alt={user.fullname} />
       </div>}
       <div className="header-titles">
         <h2>{user.fullname}</h2>

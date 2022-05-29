@@ -1,7 +1,6 @@
-import { Document } from "../interfaces/Document";
 
 interface Props {
-  documents: Document;
+  documents?: {cv: string};
 }
 
 const HeaderButtonsContainer: React.FC<Props> = ({ documents }) => {
