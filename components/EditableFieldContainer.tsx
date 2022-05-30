@@ -3,7 +3,7 @@ import { Button, Form, Row, Col } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { useEditUserMutation } from "../generated/graphql";
+import { useEditUserMutation, User } from "../generated/graphql";
 import Axios from "axios";
 
 interface Props {
@@ -12,6 +12,7 @@ interface Props {
   userId: string;
   setProp: (type: any) => void;
   setPropArea: (type: boolean) => void;
+  setUser?: (type: User) => void
 }
 
 const EditableFieldContainer: React.FC<Props> = ({
@@ -20,11 +21,16 @@ const EditableFieldContainer: React.FC<Props> = ({
   userId,
   setProp,
   setPropArea,
+  setUser
 }) => {
-  const [changeProp, setChangeProp] = useState<any>(prop ? prop : "");
+  const [changeProp, setChangeProp] = useState<any>(prop && type !== 'password' ? prop : "");
   const [file, setFile] = useState<any>();
   const { mutate } = useEditUserMutation({
-    onSuccess: () => {},
+    onSuccess: (data) => {
+      toast.info(`Profile updated!`);
+      const userData: any = data?.editUser; // QuickFix: type any to be type User
+      setUser !== undefined && setUser(userData);
+    },
     onError: (err: any) => {
       const errorMsg = String(err).split(":")[1];
       toast.error(`${errorMsg}`);
@@ -87,7 +93,7 @@ const EditableFieldContainer: React.FC<Props> = ({
   };
 
   return (
-    <span className="editable-container editable-inline">
+    <div className="editable-container editable-inline">
       <div>
         <Form
           className="form-inline editableform"
@@ -136,7 +142,7 @@ const EditableFieldContainer: React.FC<Props> = ({
           </Form.Group>
         </Form>
       </div>
-    </span>
+    </div>
   );
 };
 

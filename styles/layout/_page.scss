@@ -1225,14 +1225,51 @@ main {
     .setting-type{
       display: flex;
       align-items: center;
+      min-height: 46px;
+      margin-bottom: 4px;
+      &.img-container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: $base-line-height;
+      }
       .btn{
         margin-bottom: 0;
+      }
+      .editable-inline{
+        
       }
       .editable-container{
         .editable-input{
           height: 46px;
           display: flex;
           align-items: center;
+        }
+        .editable-buttons{
+          .btn{
+            padding: 12px 18px;
+          }
+        }
+      }
+      a{
+        color: $light;
+        transition: opacity .3s ease-in-out;
+        &:hover, 
+        &:active,
+        &:focus{
+          opacity: .7;
+        }
+
+        &.password-field,
+        &.email-field{
+          transition: all .3s ease-in-out;
+          &:hover, 
+          &:active,
+          &:focus{
+            color: $alert;
+            opacity: 1;
+            text-shadow: 0px 0px 15px rgba($light, .05);
+          }
         }
       }
     }

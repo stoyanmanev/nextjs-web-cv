@@ -4,9 +4,10 @@ import EditableFieldContainer from "../EditableFieldContainer"
 
 interface Props {
     user: User
+    setUser: (type: User) => void
 }
 
-const SettingsProfileImage: React.FC<Props> = ({user}) => {
+const SettingsProfileImage: React.FC<Props> = ({user, setUser}) => {
 
     const [editableAreaImage, setEditableAreaImage] = useState(false);
     const [profileImage, setProfileImage] = useState(user.img);
@@ -24,6 +25,7 @@ const SettingsProfileImage: React.FC<Props> = ({user}) => {
             userId={user._id}
             setProp={setProp}
             setPropArea={setPropArea}
+            setUser={setUser}
           />
         );
       };
@@ -68,8 +70,7 @@ const SettingsProfileImage: React.FC<Props> = ({user}) => {
 
 
     return(
-        <div className="setting-type">
-            <span className="me-3">Profile Image: </span>
+        <div className="setting-type img-container">
             {!editableAreaImage
                 ? notEditable(profileImage, setEditableAreaImage, 'img')
                 : editableInput(profileImage, 'img' ,setProfileImage, setEditableAreaImage)}

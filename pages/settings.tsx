@@ -1,15 +1,22 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useState, useEffect } from "react";
 import HeaderContainer from "../components/HeaderContainer";
 import SettingsContainer from "../components/main/SettingsContainer";
-import { useCurrentUserQuery } from "../generated/graphql";
+import { useCurrentUserQuery, User } from "../generated/graphql";
 
 const Settings: NextPage = () => {
-  const { isLoading, isError, data, error, refetch } = useCurrentUserQuery(
+  const [user, setUser] = useState<User>()
+  const { isLoading, isError, data, error, refetch } = useCurrentUserQuery<any>(
     {},
     { refetchOnWindowFocus: false }
   );
 
+  useEffect(() => {
+    if(data?.currentUser){
+      setUser(data.currentUser);
+    }
+  }, [data])
 
   if (isLoading) {
     return (
@@ -40,11 +47,11 @@ const Settings: NextPage = () => {
         <div className="lm-bg"></div>
         <div className="page">
           <div className="page-content">
-            <HeaderContainer user={data?.currentUser} />
+            {user && <HeaderContainer user={user} />}
             <main>
               <div className="content-area">
                 <div className="animated-sections">
-                  <SettingsContainer user={data?.currentUser} />
+                  {user && <SettingsContainer user={user} setUser={setUser}/>}
                 </div>
               </div>
             </main>

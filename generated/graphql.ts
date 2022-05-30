@@ -43,7 +43,7 @@ export type Document = {
 
 export type EditUserInput = {
   address?: InputMaybe<Scalars['String']>;
-  age?: InputMaybe<Scalars['Float']>;
+  age?: InputMaybe<Scalars['String']>;
   blog?: InputMaybe<Array<NewsInput>>;
   description?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
@@ -203,7 +203,7 @@ export type User = {
   _id: Scalars['ObjectId'];
   abilities?: Maybe<Array<Abilities>>;
   address?: Maybe<Scalars['String']>;
-  age?: Maybe<Scalars['Float']>;
+  age?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   documents?: Maybe<Array<Document>>;
   email: Scalars['String'];
@@ -250,19 +250,19 @@ export type DeleteNewsMutation = { __typename?: 'Mutation', deleteNews: { __type
 export type UsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type UsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', _id: any, fullname: string, email: string, position?: string | null, age?: number | null }> };
+export type UsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', _id: any, fullname: string, email: string, position?: string | null, age?: string | null }> };
 
 export type UserQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: number | null, form?: boolean | null, description?: string | null, documents?: Array<{ __typename?: 'Document', cv?: string | null }> | null, facts?: Array<{ __typename?: 'Fact', name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null, portfolio?: Array<{ __typename?: 'Portfolio', name: string, category: string, image: string, link: string }> | null } };
+export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, form?: boolean | null, description?: string | null, documents?: Array<{ __typename?: 'Document', cv?: string | null }> | null, facts?: Array<{ __typename?: 'Fact', name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null, portfolio?: Array<{ __typename?: 'Portfolio', name: string, category: string, image: string, link: string }> | null } };
 
 export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: number | null, form?: boolean | null, description?: string | null, documents?: Array<{ __typename?: 'Document', cv?: string | null }> | null, facts?: Array<{ __typename?: 'Fact', name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null, portfolio?: Array<{ __typename?: 'Portfolio', name: string, category: string, image: string, link: string }> | null } };
+export type CurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, form?: boolean | null, description?: string | null, documents?: Array<{ __typename?: 'Document', cv?: string | null }> | null, facts?: Array<{ __typename?: 'Fact', name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null, portfolio?: Array<{ __typename?: 'Portfolio', name: string, category: string, image: string, link: string }> | null } };
 
 export type CreateUserMutationVariables = Exact<{
   data: CreateUserInput;
@@ -284,7 +284,7 @@ export type EditUserMutationVariables = Exact<{
 }>;
 
 
-export type EditUserMutation = { __typename?: 'Mutation', editUser: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: number | null, form?: boolean | null, description?: string | null, documents?: Array<{ __typename?: 'Document', cv?: string | null }> | null, facts?: Array<{ __typename?: 'Fact', name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null, portfolio?: Array<{ __typename?: 'Portfolio', name: string, category: string, image: string, link: string }> | null } };
+export type EditUserMutation = { __typename?: 'Mutation', editUser: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, form?: boolean | null, description?: string | null, documents?: Array<{ __typename?: 'Document', cv?: string | null }> | null, facts?: Array<{ __typename?: 'Fact', name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null, portfolio?: Array<{ __typename?: 'Portfolio', name: string, category: string, image: string, link: string }> | null } };
 
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
