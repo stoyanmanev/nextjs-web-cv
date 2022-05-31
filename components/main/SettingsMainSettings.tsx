@@ -91,8 +91,6 @@ const SettingsMainSettings: React.FC<Props> = ({user, setUser}) => {
         );
       };
     
-
-
     return(
       <>
         <div className="setting-type">

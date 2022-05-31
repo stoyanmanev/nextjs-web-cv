@@ -43,12 +43,6 @@ query User($id: String!){
       knowledges,
     	skills
     },
-    portfolio {
-      name, 
-      category,
-      image,
-      link
-    }
   }
 }
 
@@ -87,12 +81,6 @@ query currentUser{
       knowledges,
     	skills
     },
-    portfolio {
-      name, 
-      category,
-      image,
-      link
-    }
   }
 }
 
@@ -148,12 +136,6 @@ mutation EditUser($id: String!, $data: EditUserInput!){
       knowledges,
     	skills
     },
-    portfolio {
-      name, 
-      category,
-      image,
-      link
-    }
   }
 }
 

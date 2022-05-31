@@ -55,7 +55,6 @@ export type EditUserInput = {
   password?: InputMaybe<Scalars['String']>;
   personalPath?: InputMaybe<Array<PersonalPathInput>>;
   phone?: InputMaybe<Scalars['String']>;
-  portfolio?: InputMaybe<Array<PortfolioInput>>;
   position?: InputMaybe<Scalars['String']>;
   residence?: InputMaybe<Scalars['String']>;
 };
@@ -75,8 +74,10 @@ export type FactInput = {
 export type Mutation = {
   __typename?: 'Mutation';
   createNews: News;
+  createPortfolio: Portfolio;
   createUser: User;
   deleteNews: News;
+  deletePortfolio: Portfolio;
   deleteUser: User;
   editUser: User;
   login: Scalars['String'];
@@ -89,12 +90,22 @@ export type MutationCreateNewsArgs = {
 };
 
 
+export type MutationCreatePortfolioArgs = {
+  data: PortfolioInput;
+};
+
+
 export type MutationCreateUserArgs = {
   data: CreateUserInput;
 };
 
 
 export type MutationDeleteNewsArgs = {
+  _id: Scalars['String'];
+};
+
+
+export type MutationDeletePortfolioArgs = {
   _id: Scalars['String'];
 };
 
@@ -167,6 +178,7 @@ export type Portfolio = {
   __typename?: 'Portfolio';
   _id: Scalars['ObjectId'];
   category: Scalars['String'];
+  createdBy: Scalars['String'];
   image: Scalars['String'];
   link: Scalars['String'];
   name: Scalars['String'];
@@ -174,7 +186,6 @@ export type Portfolio = {
 
 export type PortfolioInput = {
   category: Scalars['String'];
-  image: Scalars['String'];
   link: Scalars['String'];
   name: Scalars['String'];
 };
@@ -184,12 +195,19 @@ export type Query = {
   currentUser: User;
   news: News;
   newses: Array<News>;
+  portfolio: Portfolio;
+  portfolios: Array<Portfolio>;
   user: User;
   users: Array<User>;
 };
 
 
 export type QueryNewsArgs = {
+  _id: Scalars['String'];
+};
+
+
+export type QueryPortfolioArgs = {
   _id: Scalars['String'];
 };
 
@@ -215,7 +233,6 @@ export type User = {
   password: Scalars['String'];
   personalPath?: Maybe<Array<PersonalPath>>;
   phone?: Maybe<Scalars['String']>;
-  portfolio?: Maybe<Array<Portfolio>>;
   position?: Maybe<Scalars['String']>;
   residence?: Maybe<Scalars['String']>;
   roles?: Maybe<Array<Scalars['String']>>;
@@ -247,6 +264,32 @@ export type DeleteNewsMutationVariables = Exact<{
 
 export type DeleteNewsMutation = { __typename?: 'Mutation', deleteNews: { __typename?: 'News', _id: any, title: string, category: string } };
 
+export type PortfoliosQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PortfoliosQuery = { __typename?: 'Query', portfolios: Array<{ __typename?: 'Portfolio', _id: any, name: string, category: string, image: string, link: string, createdBy: string }> };
+
+export type PortfolioQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type PortfolioQuery = { __typename?: 'Query', portfolio: { __typename?: 'Portfolio', _id: any, name: string, category: string, image: string, link: string, createdBy: string } };
+
+export type CreatePortfolioMutationVariables = Exact<{
+  data: PortfolioInput;
+}>;
+
+
+export type CreatePortfolioMutation = { __typename?: 'Mutation', createPortfolio: { __typename?: 'Portfolio', _id: any, name: string, category: string, image: string, link: string, createdBy: string } };
+
+export type DeletePortfolioMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type DeletePortfolioMutation = { __typename?: 'Mutation', deletePortfolio: { __typename?: 'Portfolio', _id: any, name: string, category: string } };
+
 export type UsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -257,12 +300,12 @@ export type UserQueryVariables = Exact<{
 }>;
 
 
-export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, form?: boolean | null, description?: string | null, documents?: Array<{ __typename?: 'Document', cv?: string | null }> | null, facts?: Array<{ __typename?: 'Fact', name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null, portfolio?: Array<{ __typename?: 'Portfolio', name: string, category: string, image: string, link: string }> | null } };
+export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, form?: boolean | null, description?: string | null, documents?: Array<{ __typename?: 'Document', cv?: string | null }> | null, facts?: Array<{ __typename?: 'Fact', name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null } };
 
 export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, form?: boolean | null, description?: string | null, documents?: Array<{ __typename?: 'Document', cv?: string | null }> | null, facts?: Array<{ __typename?: 'Fact', name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null, portfolio?: Array<{ __typename?: 'Portfolio', name: string, category: string, image: string, link: string }> | null } };
+export type CurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, form?: boolean | null, description?: string | null, documents?: Array<{ __typename?: 'Document', cv?: string | null }> | null, facts?: Array<{ __typename?: 'Fact', name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null } };
 
 export type CreateUserMutationVariables = Exact<{
   data: CreateUserInput;
@@ -284,7 +327,7 @@ export type EditUserMutationVariables = Exact<{
 }>;
 
 
-export type EditUserMutation = { __typename?: 'Mutation', editUser: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, form?: boolean | null, description?: string | null, documents?: Array<{ __typename?: 'Document', cv?: string | null }> | null, facts?: Array<{ __typename?: 'Fact', name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null, portfolio?: Array<{ __typename?: 'Portfolio', name: string, category: string, image: string, link: string }> | null } };
+export type EditUserMutation = { __typename?: 'Mutation', editUser: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, form?: boolean | null, description?: string | null, documents?: Array<{ __typename?: 'Document', cv?: string | null }> | null, facts?: Array<{ __typename?: 'Fact', name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null } };
 
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
@@ -393,6 +436,93 @@ export const useDeleteNewsMutation = <
       (variables?: DeleteNewsMutationVariables) => fetchData<DeleteNewsMutation, DeleteNewsMutationVariables>(DeleteNewsDocument, variables)(),
       options
     );
+export const PortfoliosDocument = `
+    query Portfolios {
+  portfolios {
+    _id
+    name
+    category
+    image
+    link
+    createdBy
+  }
+}
+    `;
+export const usePortfoliosQuery = <
+      TData = PortfoliosQuery,
+      TError = unknown
+    >(
+      variables?: PortfoliosQueryVariables,
+      options?: UseQueryOptions<PortfoliosQuery, TError, TData>
+    ) =>
+    useQuery<PortfoliosQuery, TError, TData>(
+      variables === undefined ? ['Portfolios'] : ['Portfolios', variables],
+      fetchData<PortfoliosQuery, PortfoliosQueryVariables>(PortfoliosDocument, variables),
+      options
+    );
+export const PortfolioDocument = `
+    query Portfolio($id: String!) {
+  portfolio(_id: $id) {
+    _id
+    name
+    category
+    image
+    link
+    createdBy
+  }
+}
+    `;
+export const usePortfolioQuery = <
+      TData = PortfolioQuery,
+      TError = unknown
+    >(
+      variables: PortfolioQueryVariables,
+      options?: UseQueryOptions<PortfolioQuery, TError, TData>
+    ) =>
+    useQuery<PortfolioQuery, TError, TData>(
+      ['Portfolio', variables],
+      fetchData<PortfolioQuery, PortfolioQueryVariables>(PortfolioDocument, variables),
+      options
+    );
+export const CreatePortfolioDocument = `
+    mutation createPortfolio($data: PortfolioInput!) {
+  createPortfolio(data: $data) {
+    _id
+    name
+    category
+    image
+    link
+    createdBy
+  }
+}
+    `;
+export const useCreatePortfolioMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<CreatePortfolioMutation, TError, CreatePortfolioMutationVariables, TContext>) =>
+    useMutation<CreatePortfolioMutation, TError, CreatePortfolioMutationVariables, TContext>(
+      ['createPortfolio'],
+      (variables?: CreatePortfolioMutationVariables) => fetchData<CreatePortfolioMutation, CreatePortfolioMutationVariables>(CreatePortfolioDocument, variables)(),
+      options
+    );
+export const DeletePortfolioDocument = `
+    mutation DeletePortfolio($id: String!) {
+  deletePortfolio(_id: $id) {
+    _id
+    name
+    category
+  }
+}
+    `;
+export const useDeletePortfolioMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<DeletePortfolioMutation, TError, DeletePortfolioMutationVariables, TContext>) =>
+    useMutation<DeletePortfolioMutation, TError, DeletePortfolioMutationVariables, TContext>(
+      ['DeletePortfolio'],
+      (variables?: DeletePortfolioMutationVariables) => fetchData<DeletePortfolioMutation, DeletePortfolioMutationVariables>(DeletePortfolioDocument, variables)(),
+      options
+    );
 export const UsersDocument = `
     query Users {
   users {
@@ -452,12 +582,6 @@ export const UserDocument = `
       knowledges
       skills
     }
-    portfolio {
-      name
-      category
-      image
-      link
-    }
   }
 }
     `;
@@ -508,12 +632,6 @@ export const CurrentUserDocument = `
     abilities {
       knowledges
       skills
-    }
-    portfolio {
-      name
-      category
-      image
-      link
     }
   }
 }
@@ -601,12 +719,6 @@ export const EditUserDocument = `
     abilities {
       knowledges
       skills
-    }
-    portfolio {
-      name
-      category
-      image
-      link
     }
   }
 }

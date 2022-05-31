@@ -1,0 +1,41 @@
+
+query Portfolios {
+  portfolios {
+    _id
+    name
+    category
+    image
+    link
+    createdBy
+  }
+}
+
+query Portfolio($id: String!) {
+  portfolio(_id: $id) {
+    _id
+    name
+    category
+    image
+    link
+    createdBy
+  }
+}
+
+mutation createPortfolio($data: PortfolioInput!) {
+  createPortfolio(data: $data) {
+    _id
+    name
+    category
+    image
+    link
+    createdBy
+  }
+}
+
+mutation DeletePortfolio($id: String!){
+  deletePortfolio(_id: $id) {
+    _id
+    name
+    category
+  }
+}

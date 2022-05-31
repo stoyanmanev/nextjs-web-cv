@@ -136,15 +136,15 @@ header {
     font-size: 12px;
     text-align: center;
   }
-  &#site_header_register{
+  &#site_header_register {
     display: flex;
     flex-direction: column;
     padding-top: 192px;
-    .header-titles{
-      margin-bottom: $base-line-height
+    .header-titles {
+      margin-bottom: $base-line-height;
     }
-    form{
-      .input-group{
+    form {
+      .input-group {
         border: 1px solid $light;
         background-color: transparent;
         margin-bottom: 16px !important;
@@ -152,7 +152,7 @@ header {
         font-size: 12px;
         line-height: 22px;
       }
-      .input-group-text{
+      .input-group-text {
         font-size: 12px;
         line-height: 22px;
         color: $light;
@@ -160,14 +160,14 @@ header {
         max-width: 129px;
         background-color: transparent !important;
       }
-      input{
+      input {
         font-size: 13px;
         line-height: 20px;
         background-color: transparent !important;
         color: $light;
         opacity: 1;
       }
-      ::placeholder{
+      ::placeholder {
         color: $light;
       }
     }
@@ -1101,7 +1101,7 @@ main {
           width: 33.33333%;
         }
       }
-      figure{
+      figure {
         width: 33.33333%;
         float: left;
         padding: 7px;
@@ -1109,12 +1109,12 @@ main {
         overflow: hidden;
         &:hover,
         &:active,
-        &:focus{
-          .name, 
+        &:focus {
+          .name,
           .category {
             opacity: 1;
           }
-          img{
+          img {
             transform: scale(1.05);
           }
         }
@@ -1122,9 +1122,9 @@ main {
           position: relative;
           overflow: hidden;
           &:after {
-            content: '';
+            content: "";
             position: absolute;
-            background-color: rgba(0,0,0,.05);
+            background-color: rgba(0, 0, 0, 0.05);
             top: 0;
             right: 0;
             bottom: 0;
@@ -1165,36 +1165,36 @@ main {
         position: relative;
         display: block;
         width: 100%;
-        transition: all .3s ease-in-out
+        transition: all 0.3s ease-in-out;
       }
     }
-    .no-items-portfolio{
+    .no-items-portfolio {
       display: block;
       width: 100%;
       background-color: #444;
       border: 1px solid #444;
       padding: 15px 21px;
-      *{
+      * {
         margin-bottom: 0;
       }
     }
   }
   [data-id="login"] {
-    form{
-      .input-group{
+    form {
+      .input-group {
         border: 1px solid $light;
         background-color: transparent;
         margin-bottom: 16px !important;
         border-radius: 10px;
         font-size: 12px;
         line-height: 22px;
-        .form-control{
-          &:focus{
+        .form-control {
+          &:focus {
             color: $light;
           }
         }
       }
-      .input-group-text{
+      .input-group-text {
         font-size: 12px;
         line-height: 22px;
         color: $light;
@@ -1202,79 +1202,179 @@ main {
         max-width: 129px;
         background-color: transparent !important;
       }
-      input{
+      input {
         font-size: 13px;
         line-height: 20px;
         background-color: transparent !important;
         color: $light;
         opacity: 1;
       }
-      ::placeholder{
+      ::placeholder {
         color: $light;
       }
     }
-    .section-content{
+    .section-content {
       padding-top: 132px;
     }
-    .content-centered{
+    .content-centered {
       text-align: center;
     }
-    
   }
-  [data-id="settings"]{
-    .setting-type{
+  [data-id="settings"] {
+    .setting-type {
       display: flex;
       align-items: center;
       min-height: 46px;
       margin-bottom: 4px;
-      &.img-container{
+      &.img-container {
         display: flex;
         align-items: center;
         justify-content: center;
         margin-bottom: $base-line-height;
       }
-      .btn{
+      .btn {
         margin-bottom: 0;
       }
-      .editable-inline{
-        
+      .editable-inline {
       }
-      .editable-container{
-        .editable-input{
+      .editable-container {
+        .editable-input {
           height: 46px;
           display: flex;
           align-items: center;
         }
-        .editable-buttons{
-          .btn{
+        .editable-buttons {
+          .btn {
             padding: 12px 18px;
           }
         }
       }
-      a{
+      a {
         color: $light;
-        transition: opacity .3s ease-in-out;
-        &:hover, 
+        transition: opacity 0.3s ease-in-out;
+        &:hover,
         &:active,
-        &:focus{
-          opacity: .7;
+        &:focus {
+          opacity: 0.7;
         }
 
         &.password-field,
-        &.email-field{
-          transition: all .3s ease-in-out;
-          &:hover, 
+        &.email-field {
+          transition: all 0.3s ease-in-out;
+          &:hover,
           &:active,
-          &:focus{
+          &:focus {
             color: $alert;
             opacity: 1;
-            text-shadow: 0px 0px 15px rgba($light, .05);
+            text-shadow: 0px 0px 15px rgba($light, 0.05);
           }
         }
       }
     }
-    .b-radius-100{
+    .b-radius-100 {
       border-radius: 100%;
+    }
+    .portfolio-edit {
+      position: relative;
+      flex-direction: column;
+      border: 1px solid rgba($light, 0.5);
+      margin: 50px 0;
+      padding: 25px 30px;
+      .setting-block-settings {
+        width: 100%;
+        text-align: center;
+        @extend .h2;
+        font-size: 27px;
+        margin-bottom: 28px;
+      }
+      .list-items-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 100%;
+        .list-item-box {
+          position: relative;
+          max-width: calc(33.3333% - 20px);
+          flex-basis: calc(33.3333% - 20px);
+          margin-bottom: 30px;
+          &:hover,
+          &:active,
+          &:focus {
+            opacity: 1;
+            img {
+              opacity: 0.4;
+            }
+            .portfolio-item {
+              opacity: 1;
+              visibility: visible;
+            }
+          }
+          img {
+            width: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease-in-out;
+          }
+          .portfolio-item {
+            position: absolute;
+            width: calc(100% - 36px);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: inline-block;
+            font-size: 14px;
+            line-height: 24px;
+            text-align: center;
+            padding: 8px 8px 6px;
+            background-color: $dark;
+            filter: drop-shadow(0px 0px 7px $light);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+            .title {
+              display: block;
+              margin-bottom: 5px;
+            }
+            svg {
+              color: $light;
+              height: 20px;
+              width: 20px;
+              transition: color 0.3s ease-in-out;
+              &:hover,
+              &:active,
+              &:focus {
+                color: $alert;
+              }
+            }
+          }
+        }
+      }
+      .btn-container {
+        position: absolute;
+        top: 35px;
+        right: 30px;
+        .btn {
+          padding: 0;
+          color: $light;
+          border: 0;
+          transition: opacity 0.3s ease-in-out;
+          &:hover,
+          &:active,
+          &:focus {
+            background-color: transparent;
+            opacity: 0.7;
+            svg {
+              opacity: 0.7;
+            }
+          }
+          svg {
+            height: 16px;
+            width: 16px;
+            color: $light;
+            transition: opacity 0.3s ease-in-out;
+          }
+        }
+      }
     }
   }
 }

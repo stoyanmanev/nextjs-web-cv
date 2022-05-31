@@ -2,6 +2,7 @@ import { User } from "../../generated/graphql";
 import {Row, Col} from 'react-bootstrap'
 import SettingsProfileImage from "./SettingsProfileImage";
 import SettingsMainSettings from "./SettingsMainSettings";
+import SettingsAdvanceSettings from "./SessionAdvanceSetting";
 
 interface Props{
     user: User;
@@ -23,6 +24,9 @@ const SettingsContainer: React.FC<Props> = ({user, setUser}) => {
         </Col>
         <Col lg={5}>
           <SettingsProfileImage user={user} setUser={setUser}/>
+        </Col>
+        <Col lg={12}>
+          <SettingsAdvanceSettings user={user} setUser={setUser} />
         </Col>
       </Row>
     </div>
