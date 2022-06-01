@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import {
   Portfolio,
-  useCreatePortfolioMutation,
   useDeletePortfolioMutation,
   usePortfoliosQuery,
   User,
@@ -11,6 +10,7 @@ import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
+import ModalPortfolio from "../ModalPortfolio";
 
 interface Props {
   user: User;
@@ -18,6 +18,8 @@ interface Props {
 
 const SettingsPortfolioList: React.FC<Props> = ({ user }) => {
   const [userPortfolioList, setUserPortfolioList] = useState<any>(); // QuickFix: any will be type Portfolio[]
+  const [showModal, setShowModal] = useState<Boolean>(false);
+
   const { isLoading, isError, data, error, refetch } = usePortfoliosQuery(
     {},
     {
@@ -36,17 +38,6 @@ const SettingsPortfolioList: React.FC<Props> = ({ user }) => {
     },
   });
 
-  const createPortfolioItem = useCreatePortfolioMutation({
-      onSuccess: () => {
-        refetch();
-        toast.success(
-            "You have successfully create an item from your portfolio"
-        );
-      },
-      onError: () => {
-        toast.error("Creation failed");
-      }
-  })
 
   useEffect(() => {
     const portfioFilteredList = data?.portfolios.filter(
@@ -68,8 +59,8 @@ const SettingsPortfolioList: React.FC<Props> = ({ user }) => {
     mutate({ id });
   };
 
-  const handleCreatePortfolioItem = () =>{
-    createPortfolioItem.mutate({data: {name: 'Craate App', category: 'fakeapp', link: "https://www.pinterest.com"}});
+  const handleOpenModalItem = () =>{
+    setShowModal(true);
   }
 
   return (
@@ -93,10 +84,11 @@ const SettingsPortfolioList: React.FC<Props> = ({ user }) => {
           </div>
         ))}
         <div className="btn-container">
-            <Button onClick={() => handleCreatePortfolioItem()} title="Add an item to your portfolio">
+            <Button onClick={() => handleOpenModalItem()} title="Add an item to your portfolio">
                 <FontAwesomeIcon icon={faPlus} />
             </Button>
         </div>
+        <ModalPortfolio setShowModal={setShowModal} isModalOpen={showModal} refetch={refetch}/>
     </div>
   );
 };
