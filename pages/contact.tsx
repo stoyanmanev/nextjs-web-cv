@@ -1,11 +1,25 @@
 import type { NextPage } from "next";
+import {useState, useEffect} from "react"
 import Head from "next/head";
 import HeaderContainer from "../components/HeaderContainer";
 import ContactContainer from "../components/main/ContactContainer";
-import HomeSectionContainer from "../components/main/HomeSectionContainer";
-import { user } from "../db/user";
+import { useCurrentUserQuery, User } from "../generated/graphql";
 
 const Contact: NextPage = () => {
+
+  const [user, setUser] = useState<User>();
+  const { data } = useCurrentUserQuery<any>(
+    {},
+    { refetchOnWindowFocus: false }
+  );
+
+  useEffect(() => {
+    if(data?.currentUser){
+      setUser(data.currentUser);
+    }
+  }, [data])
+
+
   return (
     <div>
       <Head>
@@ -18,11 +32,11 @@ const Contact: NextPage = () => {
         <div className="lm-bg"></div>
         <div className="page">
           <div className="page-content">
-            <HeaderContainer user={user} />
+            {user && <HeaderContainer user={user} />}
             <main>
               <div className="content-area">
                 <div className="animated-sections">
-                  <ContactContainer user={user} />
+                  {user && <ContactContainer user={user} />}
                 </div>
               </div>
             </main>

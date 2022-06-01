@@ -1,10 +1,24 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import {useState, useEffect} from "react";
 import HeaderContainer from "../components/HeaderContainer";
 import PortfolioSectionContainer from "../components/main/PortfolioSectionContainer";
-import { user } from "../db/user";
+import { useCurrentUserQuery, User } from "../generated/graphql";
 
 const Portfolio: NextPage = () => {
+
+  const [user, setUser] = useState<User>();
+  const { data } = useCurrentUserQuery<any>(
+    {},
+    { refetchOnWindowFocus: false }
+  );
+
+  useEffect(() => {
+    if(data?.currentUser){
+      setUser(data.currentUser);
+    }
+  }, [data])
+
   return (
     <div>
       <Head>
@@ -17,11 +31,11 @@ const Portfolio: NextPage = () => {
         <div className="lm-bg"></div>
         <div className="page">
           <div className="page-content">
-            <HeaderContainer user={user} />
+            {user && <HeaderContainer user={user} />}
             <main>
               <div className="content-area">
                 <div className="animated-sections">
-                  {user.portfolio && <PortfolioSectionContainer portfolio={user.portfolio} />}
+                  {user && <PortfolioSectionContainer userID={user._id} />}
                 </div>
               </div>
             </main>

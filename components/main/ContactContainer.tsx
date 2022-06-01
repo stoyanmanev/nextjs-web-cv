@@ -1,12 +1,11 @@
 import {
   faEnvelope,
   faLocationDot,
-  faPhone,
-  faCircleCheck,
+  faPhone
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Row, Col } from "react-bootstrap";
-import { User } from "../../interfaces/User";
+import { User } from "../../generated/graphql";
 import ContactForm from "./ContactForm";
 
 interface Props {
@@ -53,9 +52,9 @@ const ContactContainer: React.FC<Props> = ({ user }) => {
             <h4>
               <a
                 title={`send e-mail to ${user.fullname}`}
-                href={`mailto:${user.eMail}`}
+                href={`mailto:${user.email}`}
               >
-                {user.eMail}
+                {user.email}
               </a>
             </h4>
             <span className="lm-info-block-value"></span>

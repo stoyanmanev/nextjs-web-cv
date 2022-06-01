@@ -1,12 +1,29 @@
 import Image from "next/image";
-import { Portfolio } from "../../interfaces/Portfolio";
+import {useState, useEffect} from 'react'
+import { usePortfoliosQuery } from "../../generated/graphql";
 
 interface Props {
-  portfolio: Portfolio[];
+  userID: string;
 }
 
-const PortfolioSectionContainer: React.FC<Props> = ({ portfolio }) => {
-  if (portfolio.length === 0) {
+const PortfolioSectionContainer: React.FC<Props> = ({ userID }) => {
+
+  const [userPortfolioList, setUserPortfolioList] = useState<any>(); // QuickFix: any will be type Portfolio[]
+  const { isLoading, isError, data, error, refetch } = usePortfoliosQuery(
+    {},
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  useEffect(() => {
+    const portfioFilteredList = data?.portfolios.filter(
+      ({ createdBy }) => createdBy === userID
+    );
+    setUserPortfolioList(portfioFilteredList);
+  }, [data]);
+
+  if (userPortfolioList?.length === 0) {
     return (
       <div data-id="portfolio" className="animated-section section-active">
         <div className="page-title">
@@ -19,24 +36,26 @@ const PortfolioSectionContainer: React.FC<Props> = ({ portfolio }) => {
     );
   }
 
+  console.log(data);
+
   return (
     <div data-id="portfolio" className="animated-section section-active">
       <div className="page-title">
         <h2>Portfolio</h2>
       </div>
-      {portfolio.length > 0 && (
+      {userPortfolioList?.length > 0 && (
         <>
-          {portfolio.map((item, i) => {
+          {userPortfolioList.map((item: any, i: number) => {
             return (
               <div key={i} className="portfolio-content">
                 <div className="portfolio-grid three-columns shuffle">
                   <figure className="item lbaudio shuffle-item filtered">
                     <div className="portfolio-item-img">
-                      <Image
+                      <img
                         src={item.image}
                         alt={item.name}
-                        width={251}
-                        height={251}
+                        width={200}
+                        height={200}
                       />
                       <a
                         href={item.link}
