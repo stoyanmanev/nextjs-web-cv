@@ -7,9 +7,10 @@ import SettingsAdvanceSettings from "./SessionAdvanceSetting";
 interface Props{
     user: User;
     setUser: (type: User) => void
+    refetch: () => void
 }
 
-const SettingsContainer: React.FC<Props> = ({user, setUser}) => {
+const SettingsContainer: React.FC<Props> = ({user, setUser, refetch}) => {
 
     return (
         <div data-id="settings" className="animated-section section-active">
@@ -26,7 +27,7 @@ const SettingsContainer: React.FC<Props> = ({user, setUser}) => {
           <SettingsProfileImage user={user} setUser={setUser}/>
         </Col>
         <Col lg={12}>
-          <SettingsAdvanceSettings user={user} setUser={setUser} />
+          <SettingsAdvanceSettings user={user} setUser={setUser} refetch={refetch}/>
         </Col>
       </Row>
     </div>

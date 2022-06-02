@@ -51,7 +51,7 @@ const Settings: NextPage = () => {
             <main>
               <div className="content-area">
                 <div className="animated-sections">
-                  {user && <SettingsContainer user={user} setUser={setUser}/>}
+                  {user && <SettingsContainer user={user} setUser={setUser} refetch={refetch}/>}
                 </div>
               </div>
             </main>

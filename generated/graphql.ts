@@ -61,12 +61,13 @@ export type EditUserInput = {
 
 export type Fact = {
   __typename?: 'Fact';
-  _id: Scalars['ObjectId'];
+  _id: Scalars['String'];
   name: Scalars['String'];
   value?: Maybe<Scalars['Float']>;
 };
 
 export type FactInput = {
+  _id: Scalars['String'];
   name: Scalars['String'];
   value: Scalars['Float'];
 };
@@ -300,12 +301,12 @@ export type UserQueryVariables = Exact<{
 }>;
 
 
-export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, form?: boolean | null, description?: string | null, documents?: Array<{ __typename?: 'Document', cv?: string | null }> | null, facts?: Array<{ __typename?: 'Fact', name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null } };
+export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, form?: boolean | null, description?: string | null, documents?: Array<{ __typename?: 'Document', cv?: string | null }> | null, facts?: Array<{ __typename?: 'Fact', _id: string, name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null } };
 
 export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, form?: boolean | null, description?: string | null, documents?: Array<{ __typename?: 'Document', cv?: string | null }> | null, facts?: Array<{ __typename?: 'Fact', name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null } };
+export type CurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, form?: boolean | null, description?: string | null, documents?: Array<{ __typename?: 'Document', cv?: string | null }> | null, facts?: Array<{ __typename?: 'Fact', _id: string, name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null } };
 
 export type CreateUserMutationVariables = Exact<{
   data: CreateUserInput;
@@ -327,7 +328,7 @@ export type EditUserMutationVariables = Exact<{
 }>;
 
 
-export type EditUserMutation = { __typename?: 'Mutation', editUser: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, form?: boolean | null, description?: string | null, documents?: Array<{ __typename?: 'Document', cv?: string | null }> | null, facts?: Array<{ __typename?: 'Fact', name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null } };
+export type EditUserMutation = { __typename?: 'Mutation', editUser: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, form?: boolean | null, description?: string | null, documents?: Array<{ __typename?: 'Document', cv?: string | null }> | null, facts?: Array<{ __typename?: 'Fact', _id: string, name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null } };
 
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
@@ -566,6 +567,7 @@ export const UserDocument = `
       cv
     }
     facts {
+      _id
       name
       value
     }
@@ -617,6 +619,7 @@ export const CurrentUserDocument = `
       cv
     }
     facts {
+      _id
       name
       value
     }
@@ -704,6 +707,7 @@ export const EditUserDocument = `
       cv
     }
     facts {
+      _id
       name
       value
     }

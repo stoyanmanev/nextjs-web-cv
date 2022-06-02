@@ -2,7 +2,7 @@ import { faHeart, faClock, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { User } from "../../interfaces/User";
+import { User } from "../../generated/graphql";
 import AboutMeList from "./AboutMeList";
 
 interface Props {
@@ -45,15 +45,15 @@ const AboutMeSectionContainer: React.FC<Props> = ({ user }) => {
                     <span className="value"> {user.address}</span>
                   </li>
                 )}
-                {user.eMail && (
+                {user.email && (
                   <li>
                     <span className="title">e-mail</span>
                     <span className="value">
                       <a
                         title={`send e-mail to ${user.fullname}`}
-                        href={`mailto:${user.eMail}`}
+                        href={`mailto:${user.email}`}
                       >
-                        {user.eMail}
+                        {user.email}
                       </a>
                     </span>
                   </li>
