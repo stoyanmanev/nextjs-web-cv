@@ -1,25 +1,18 @@
-import { User } from "../../interfaces/User";
-import { News } from "../../interfaces/News";
+import { News, User } from "../../generated/graphql";
 import { useState } from "react";
-import Image from "next/image";
 import BlogNews from "./BlogNews";
 import BlogItemCreate from "./BlogItemCreate";
 import BlogCreateNews from "./BlogCreateNews";
 
 interface Props {
   user: User;
+  blog: News[]
+  setBlog: (type: News) => void;
 }
 
-const BlogList: React.FC<Props> = ({ user }) => {
+const BlogList: React.FC<Props> = ({ user, blog, setBlog }) => {
   const [isViewNews, setIsViewNews] = useState<Boolean>(false);
-  const [activeNews, setActiveNews] = useState<News>({
-    category: "",
-    date: "",
-    title: "",
-    description: "",
-    image: "",
-    createdBy: ""
-  });
+  const [activeNews, setActiveNews] = useState<News>();
   const [isCreateNews, setIsCreateNews] = useState<Boolean>(false);
 
   async function setNews(news: News){
@@ -28,17 +21,17 @@ const BlogList: React.FC<Props> = ({ user }) => {
   }
 
   if(isCreateNews){
-    return <BlogCreateNews user={user} />
+    return <BlogCreateNews user={user} setBlog={setBlog}/>
   }
 
   if (isViewNews) {
-    return <BlogNews news={activeNews} setIsViewNews={setIsViewNews}/>;
+    return activeNews ? <BlogNews news={activeNews} user={user} setIsViewNews={setIsViewNews}/> : <>Active news not preset</>
   }
 
-  if (user.blog && user.blog.length > 0) {
+  if (blog && blog.length > 0) {
     return (
       <>
-        {user.blog.map((news, i) => {
+        {blog.map((news, i) => {
           return (
             <div key={i} className="item post-1">
               <div className="blog-card">
@@ -50,7 +43,7 @@ const BlogList: React.FC<Props> = ({ user }) => {
                   </div>
                   <a href="#" onClick={() => setNews(news)}>
                     {news.image && (
-                      <Image
+                      <img
                         src={news.image}
                         className="size-blog-masonry-image-two-c"
                         alt="Why I Switched to Sketch For UI Design"

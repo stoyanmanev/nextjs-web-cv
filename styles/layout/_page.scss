@@ -835,10 +835,13 @@ main {
   }
   [data-id="blog"] {
     .blog-masonry {
+      display: flex;
+      flex-wrap: wrap;
+      // flex-direction: row-reverse;
       &.two-columns {
         .item {
-          width: 50%;
-          float: left;
+          flex-basis: 50%;
+          max-width: 50%;
           padding: 0 1em 2em;
           &.no-found-news {
             width: 100%;
@@ -850,6 +853,11 @@ main {
           }
         }
       }
+    }
+    .create-btn-container{
+      position: absolute;
+      top: 65px;
+      right: 60px;
     }
     .blog-card {
       display: block;

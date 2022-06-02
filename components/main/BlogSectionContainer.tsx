@@ -1,5 +1,6 @@
+import { useEffect, useState } from "react";
 import { Row, Col } from "react-bootstrap";
-import { User } from "../../interfaces/User";
+import { News, useNewsesQuery, User } from "../../generated/graphql";
 import BlogList from "./BlogList";
 
 interface Props {
@@ -7,6 +8,35 @@ interface Props {
 }
 
 const BlogSectionContainer: React.FC<Props> = ({ user }) => {
+  const [blog, setBlog] = useState<any>();
+  const { isError, error, isLoading, data, refetch } = useNewsesQuery(
+    {},
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  useEffect(() => {
+    if (data?.newses) {
+      setBlog(data.newses);
+    }
+  }, [data]);
+
+  if (isLoading) {
+    return (
+      <div>
+        <span>Loading...</span>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div>
+        <span>We were unable to load blog news</span>
+      </div>
+    );
+  }
   return (
     <div data-id="blog" className="animated-section section-active">
       <Row>
@@ -20,7 +50,7 @@ const BlogSectionContainer: React.FC<Props> = ({ user }) => {
             <div className="row">
               <div className="col-xs-12 col-sm-12">
                 <div className="blog-masonry two-columns clearfix">
-                  {user.blog && <BlogList user={user} />}
+                  {blog && <BlogList user={user} blog={blog} setBlog={setBlog}/>}
                 </div>
               </div>
             </div>

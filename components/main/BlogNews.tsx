@@ -1,5 +1,3 @@
-import { News } from "../../interfaces/News";
-import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
@@ -7,20 +5,22 @@ import {
   faLinkedinIn,
 } from "@fortawesome/free-brands-svg-icons";
 import { faArrowLeft} from "@fortawesome/free-solid-svg-icons";
+import { News, User } from "../../generated/graphql";
 
 interface Props {
+  user: User
   news: News
   setIsViewNews: (type: boolean) => void
 }
 
-const BlogNews: React.FC<Props> = ({ news, setIsViewNews}) => {
+const BlogNews: React.FC<Props> = ({user, news, setIsViewNews}) => {
   return (
     <article className="post">
         <div className="return-btn">
             <FontAwesomeIcon icon={faArrowLeft} onClick={() => setIsViewNews(false)}/>
         </div>
       <div className="post-thumbnail">
-        <Image width={760} height={366} src={news.image} alt="image" />
+        <img width={760} height={366} src={news.image} alt="image" />
       </div>
 
       <div className="post-content">
@@ -51,13 +51,13 @@ const BlogNews: React.FC<Props> = ({ news, setIsViewNews}) => {
             <span className="entry-date">
               <a href="#" rel="bookmark">
                 <i className="far fa-clock"></i>{" "}
-                <span className="entry-date">{news.date}</span>
+                <span className="entry-date">{new Date(Number(news.date)).toDateString() }</span>
               </a>
             </span>
             <span className="author vcard">
               <a className="url fn n" href="#" rel="author">
                 {" "}
-                <i className="fas fa-user"></i> {news.createdBy}
+                <i className="fas fa-user"></i> {user.fullname}
               </a>
             </span>
           </div>
