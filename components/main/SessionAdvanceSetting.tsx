@@ -5,6 +5,7 @@ import SettingsGoogleIframe from "./SettingsGoogleIframe";
 import SettingsForm from "./SettingsForm";
 import EditableFieldTextArea from "../EditableFieldTextArea";
 import SettingsFactsContainer from "./SettingsFactsContainer";
+import SettingsBlogList from "./SettingsBlogList";
 
 interface Props {
   user: User;
@@ -83,6 +84,10 @@ const SessionAdvanceSetting: React.FC<Props> = ({ user, setUser, refetch }) => {
       <div className="setting-type fact-edit">
         <span className="setting-block-settings">Facts</span>
         <SettingsFactsContainer user={user} refetch={refetch}/>
+      </div>
+      <div className="setting-type portfolio-edit">
+        <span className="setting-block-settings">Blog Settings</span>
+        <SettingsBlogList user={user} />
       </div>
     </>
   );

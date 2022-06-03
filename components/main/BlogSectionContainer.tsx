@@ -50,7 +50,7 @@ const BlogSectionContainer: React.FC<Props> = ({ user }) => {
             <div className="row">
               <div className="col-xs-12 col-sm-12">
                 <div className="blog-masonry two-columns clearfix">
-                  {blog && <BlogList user={user} blog={blog} setBlog={setBlog}/>}
+                  {blog && <BlogList user={user} blog={blog} setBlog={setBlog} refetch={refetch}/>}
                 </div>
               </div>
             </div>

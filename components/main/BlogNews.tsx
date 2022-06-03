@@ -4,8 +4,9 @@ import {
   faGithub,
   faLinkedinIn,
 } from "@fortawesome/free-brands-svg-icons";
-import { faArrowLeft} from "@fortawesome/free-solid-svg-icons";
-import { News, User } from "../../generated/graphql";
+import { faArrowLeft, faClock, faUser} from "@fortawesome/free-solid-svg-icons";
+import { News, User, useUserQuery } from "../../generated/graphql";
+import { useEffect, useState } from "react";
 
 interface Props {
   user: User
@@ -14,6 +15,24 @@ interface Props {
 }
 
 const BlogNews: React.FC<Props> = ({user, news, setIsViewNews}) => {
+  const [userCreated, setUserCreated] = useState<any>()
+  const {isError, isLoading ,data} = useUserQuery({id: news.createdBy}, {
+    refetchOnWindowFocus: false
+  })
+
+  useEffect(() => {
+    if(data?.user){
+      setUserCreated(data.user)
+    }
+  }, [data])
+
+  const createdUsername = () => {
+    if(isLoading) return <>Loading...</>
+    if(isError) return <>Something went wrong</>
+    if(userCreated) return <>{userCreated.fullname}</>
+  }
+
+
   return (
     <article className="post">
         <div className="return-btn">
@@ -50,14 +69,14 @@ const BlogNews: React.FC<Props> = ({user, news, setIsViewNews}) => {
           <div className="date-author">
             <span className="entry-date">
               <a href="#" rel="bookmark">
-                <i className="far fa-clock"></i>{" "}
+                <FontAwesomeIcon icon={faClock} />{" "}
                 <span className="entry-date">{new Date(Number(news.date)).toDateString() }</span>
               </a>
             </span>
             <span className="author vcard">
               <a className="url fn n" href="#" rel="author">
                 {" "}
-                <i className="fas fa-user"></i> {user.fullname}
+                <FontAwesomeIcon icon={faUser} /> {createdUsername()}
               </a>
             </span>
           </div>

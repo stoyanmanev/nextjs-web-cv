@@ -54,12 +54,14 @@ header {
       min-height: 180px;
       margin: 0 auto 30px;
       z-index: 1;
-
+      
       img {
         max-width: 100%;
         background-color: #fff;
         border: 3px solid #fff;
         border-radius: 300px;
+        object-fit: cover;
+        object-position: center;
       }
       &:after {
         content: "";
@@ -835,13 +837,14 @@ main {
   }
   [data-id="blog"] {
     .blog-masonry {
-      display: flex;
-      flex-wrap: wrap;
+      // display: flex;
+      // flex-wrap: wrap;
       // flex-direction: row-reverse;
       &.two-columns {
         .item {
           flex-basis: 50%;
           max-width: 50%;
+          float: left;
           padding: 0 1em 2em;
           &.no-found-news {
             width: 100%;
@@ -934,6 +937,7 @@ main {
       background: #b2b2b2;
       display: block;
       position: relative;
+      max-height: 400px;
       width: 100%;
       z-index: 0;
       * {
@@ -946,6 +950,7 @@ main {
         background-position: center;
         object-fit: cover;
         object-position: center;
+        max-height: 400px;
       }
     }
     .post {
@@ -1069,28 +1074,6 @@ main {
               }
             }
           }
-        }
-      }
-      .return-btn {
-        position: absolute;
-        top: 72px;
-        right: 36px;
-        height: 20px;
-        width: 20px;
-        overflow: hidden;
-        &:hover,
-        &:active,
-        &:focus {
-          svg {
-            color: $primary;
-          }
-        }
-        svg {
-          font-size: 20px;
-          line-height: 1em;
-          color: $medium;
-          cursor: pointer;
-          transition: color 0.3s ease-in-out;
         }
       }
     }

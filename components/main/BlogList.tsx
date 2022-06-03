@@ -8,9 +8,10 @@ interface Props {
   user: User;
   blog: News[]
   setBlog: (type: News) => void;
+  refetch: () => void;
 }
 
-const BlogList: React.FC<Props> = ({ user, blog, setBlog }) => {
+const BlogList: React.FC<Props> = ({ user, blog, setBlog, refetch }) => {
   const [isViewNews, setIsViewNews] = useState<Boolean>(false);
   const [activeNews, setActiveNews] = useState<News>();
   const [isCreateNews, setIsCreateNews] = useState<Boolean>(false);
@@ -20,8 +21,16 @@ const BlogList: React.FC<Props> = ({ user, blog, setBlog }) => {
     return setIsViewNews(true);
   }
 
+  const convertToDate = (date: string) =>{
+    const toNumber: number = Number(date);
+    const newDate = new Date(toNumber).toDateString();
+    return <>
+      {newDate}
+    </>
+  }
+
   if(isCreateNews){
-    return <BlogCreateNews user={user} setBlog={setBlog}/>
+    return <BlogCreateNews user={user} setBlog={setBlog} refetch={refetch} setIsCreateNew={setIsCreateNews}/>
   }
 
   if (isViewNews) {
@@ -31,9 +40,9 @@ const BlogList: React.FC<Props> = ({ user, blog, setBlog }) => {
   if (blog && blog.length > 0) {
     return (
       <>
-        {blog.map((news, i) => {
+        {blog.reverse().map(news => {
           return (
-            <div key={i} className="item post-1">
+            <div key={news._id} className="item post-1">
               <div className="blog-card">
                 <div className="media-block">
                   <div className="category">
@@ -55,7 +64,7 @@ const BlogList: React.FC<Props> = ({ user, blog, setBlog }) => {
                   </a>
                 </div>
                 <div className="post-info">
-                  {news.date && <div className="post-date">{news.date}</div>}
+                  {news.date && <div className="post-date">{convertToDate(news.date)}</div>}
                   <a href="blog-post-1.html">
                     {news.title && (
                       <h4 className="blog-item-title">{news.title}</h4>
@@ -65,7 +74,7 @@ const BlogList: React.FC<Props> = ({ user, blog, setBlog }) => {
               </div>
             </div>
           );
-        })}
+        }).reverse()}
         <BlogItemCreate setIsCreateNews={setIsCreateNews}/>
       </>
     );

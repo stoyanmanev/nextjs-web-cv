@@ -2,14 +2,18 @@ import Axios from "axios";
 import { FormEvent, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { toast } from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft} from "@fortawesome/free-solid-svg-icons";
 import { News, useCreateNewsMutation, User } from "../../generated/graphql";
 
 interface Props {
   user: User;
-  setBlog: (type: News) => void
+  setBlog: (type: News) => void;
+  refetch: () => void;
+  setIsCreateNew: (type: Boolean) => void;
 }
 
-const BlogCreateNews: React.FC<Props> = ({ user, setBlog }) => {
+const BlogCreateNews: React.FC<Props> = ({ user, setBlog, refetch, setIsCreateNew }) => {
   const [title, setTitle] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -20,12 +24,9 @@ const BlogCreateNews: React.FC<Props> = ({ user, setBlog }) => {
     title !== "" && category !== "" && description !== "" && file !== "";
 
   const { mutate } = useCreateNewsMutation({
-    onSuccess: (data) => {
-
+    onSuccess: () => {
+      refetch();
       toast.info(`The news was created successfully`);
-      // const userData: any = data?.editUser; // QuickFix: type any to be type User
-      console.log(data)
-      // setBlog()
     },
     onError: (err: any) => {
       const errorMsg = String(err).split(":")[1];
@@ -58,19 +59,32 @@ const BlogCreateNews: React.FC<Props> = ({ user, setBlog }) => {
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const keywordsToArray = keywords.split(",").map((word) => word.trim());
+    const keywordsToArray = keywords.split(",").filter((word) => word.trim() !== "").map(word => word.trim());
     if (!isContentPreset) return false;
     const isUploaded = await uploadImage(); // isUploaded if is success return url path to image
     if (isUploaded) {
-      await mutate({data: {title, category, description, image: isUploaded, keywords: keywordsToArray}});
+      await mutate({
+        data: {
+          title,
+          category,
+          description,
+          image: isUploaded,
+          keywords: keywordsToArray,
+        },
+      });
     } else {
       toast.error(`Image uploaded failed`);
     }
-    console.log(title, category, description, file, keywordsToArray);
   };
 
   return (
     <div className="blog-form-container">
+      <div className="return-btn">
+        <FontAwesomeIcon
+          icon={faArrowLeft}
+          onClick={() => setIsCreateNew(false)}
+        />
+      </div>
       <Form onSubmit={(e) => submitHandler(e)} className="blog-form">
         <Form.Group>
           <Form.Control
@@ -90,8 +104,9 @@ const BlogCreateNews: React.FC<Props> = ({ user, setBlog }) => {
             placeholder="Category"
           />
           <Form.Control
-            type="text"
+            as="textarea"
             value={description}
+            rows={5}
             onChange={(e) => {
               setDescription(e.target.value);
             }}
