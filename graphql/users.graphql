@@ -22,10 +22,13 @@ query User($id: String!){
   	googleIframe,
   	age,
   	form,
+    facebook,
+    linkedin,
+    twitter,
+    github,
+    facebook,
   	description,
-    documents {
-      cv
-    },
+    cv,
     facts {
       _id,
       name, 
@@ -61,10 +64,12 @@ query currentUser{
   	googleIframe,
   	age,
   	form,
+    facebook,
+    linkedin,
+    twitter,
+    github,
   	description,
-    documents {
-      cv
-    },
+    cv,
     facts {
       _id,
       name, 
@@ -116,11 +121,13 @@ mutation EditUser($id: String!, $data: EditUserInput!){
   	address,
   	googleIframe,
   	age,
+    facebook,
+    linkedin,
+    twitter,
+    github,
   	form,
   	description,
-    documents {
-      cv
-    },
+    cv,
     facts {
       _id,
       name, 

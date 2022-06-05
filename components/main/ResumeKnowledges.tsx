@@ -1,7 +1,6 @@
-import { Knowledge } from "../../interfaces/Knowledge";
 
 interface Props {
-  knowledges: Knowledge[];
+  knowledges: any[];
 }
 
 const ResumeKnowledges: React.FC<Props> = ({ knowledges }) => {

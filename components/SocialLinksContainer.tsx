@@ -6,21 +6,21 @@ import {
   faLinkedinIn,
   faTwitter
 } from "@fortawesome/free-brands-svg-icons";
-import { Social } from "../interfaces/Social";
 import React from "react";
+import { User } from "../generated/graphql";
 
 interface Props {
-  social: Social;
+  user: User;
 }
 
-const SocialLinksContainer: React.FC<Props> = ({ social }) => {
+const SocialLinksContainer: React.FC<Props> = ({ user }) => {
   return (
     <div className="social-links">
       <ul>
-        {social?.linkenid && (
+        {user?.linkedin && (
           <li>
             <a
-              href={social.linkenid}
+              href={user.linkedin}
               target="_blank"
               rel="noreferrer"
               title="Follow me in LinkedIn"
@@ -29,10 +29,10 @@ const SocialLinksContainer: React.FC<Props> = ({ social }) => {
             </a>
           </li>
         )}
-        {social?.facebook && (
+        {user?.facebook && (
           <li>
             <a
-              href={social.facebook}
+              href={user.facebook}
               target="_blank"
               rel="noreferrer"
               title="Follow me in Facebook"
@@ -41,10 +41,10 @@ const SocialLinksContainer: React.FC<Props> = ({ social }) => {
             </a>
           </li>
         )}
-        {social?.twitter && (
+        {user?.twitter && (
           <li>
             <a
-              href={social.twitter}
+              href={user.twitter}
               target="_blank"
               rel="noreferrer"
               title="Follow me in Twitter"
@@ -53,9 +53,9 @@ const SocialLinksContainer: React.FC<Props> = ({ social }) => {
             </a>
           </li>
         )}
-        {social?.github && (
+        {user?.github && (
           <li>
-            <a href={social.github} target="_blank" rel="noreferrer" title="Follow me in GitHub">
+            <a href={user.github} target="_blank" rel="noreferrer" title="Follow me in GitHub">
               <FontAwesomeIcon icon={faGithub} />
             </a>
           </li>

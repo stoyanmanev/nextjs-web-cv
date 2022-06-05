@@ -1,13 +1,13 @@
 
 interface Props {
-  documents?: {cv: string};
+  cv: string;
 }
 
-const HeaderButtonsContainer: React.FC<Props> = ({ documents }) => {
+const HeaderButtonsContainer: React.FC<Props> = ({ cv }) => {
   return (
     <div className="header-buttons">
-      {documents?.cv && (
-        <a href={documents.cv} target="_blank" rel="noreferrer" className="btn btn-primary">
+      {cv && (
+        <a href={cv} target="_blank" rel="noreferrer" className="btn btn-primary">
           Download CV
         </a>
       )}

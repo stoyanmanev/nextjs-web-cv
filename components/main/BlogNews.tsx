@@ -3,41 +3,51 @@ import {
   faFacebookF,
   faGithub,
   faLinkedinIn,
+  faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-import { faArrowLeft, faClock, faUser} from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeft,
+  faClock,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { News, User, useUserQuery } from "../../generated/graphql";
 import { useEffect, useState } from "react";
 
 interface Props {
-  user: User
-  news: News
-  setIsViewNews: (type: boolean) => void
+  user: User;
+  news: News;
+  setIsViewNews: (type: boolean) => void;
 }
 
-const BlogNews: React.FC<Props> = ({user, news, setIsViewNews}) => {
-  const [userCreated, setUserCreated] = useState<any>()
-  const {isError, isLoading ,data} = useUserQuery({id: news.createdBy}, {
-    refetchOnWindowFocus: false
-  })
+const BlogNews: React.FC<Props> = ({ user, news, setIsViewNews }) => {
+  const [userCreated, setUserCreated] = useState<any>();
+  const { isError, isLoading, data } = useUserQuery(
+    { id: news.createdBy },
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
 
   useEffect(() => {
-    if(data?.user){
-      setUserCreated(data.user)
+    if (data?.user) {
+      setUserCreated(data.user);
     }
-  }, [data])
+  }, [data]);
 
   const createdUsername = () => {
-    if(isLoading) return <>Loading...</>
-    if(isError) return <>Something went wrong</>
-    if(userCreated) return <>{userCreated.fullname}</>
-  }
-
+    if (isLoading) return <>Loading...</>;
+    if (isError) return <>Something went wrong</>;
+    if (userCreated) return <>{userCreated.fullname}</>;
+  };
 
   return (
     <article className="post">
-        <div className="return-btn">
-            <FontAwesomeIcon icon={faArrowLeft} onClick={() => setIsViewNews(false)}/>
-        </div>
+      <div className="return-btn">
+        <FontAwesomeIcon
+          icon={faArrowLeft}
+          onClick={() => setIsViewNews(false)}
+        />
+      </div>
       <div className="post-thumbnail">
         <img width={760} height={366} src={news.image} alt="image" />
       </div>
@@ -68,32 +78,53 @@ const BlogNews: React.FC<Props> = ({user, news, setIsViewNews}) => {
         <div className="entry-meta entry-meta-bottom">
           <div className="date-author">
             <span className="entry-date">
-              <a href="#" rel="bookmark">
-                <FontAwesomeIcon icon={faClock} />{" "}
-                <span className="entry-date">{new Date(Number(news.date)).toDateString() }</span>
-              </a>
+              <FontAwesomeIcon icon={faClock} />{" "}
+              <span className="entry-date">
+                {new Date(Number(news.date)).toDateString()}
+              </span>
             </span>
             <span className="author vcard">
-              <a className="url fn n" href="#" rel="author">
-                {" "}
-                <FontAwesomeIcon icon={faUser} /> {createdUsername()}
-              </a>
+              {" "}
+              <FontAwesomeIcon icon={faUser} /> {createdUsername()}
             </span>
           </div>
 
           <div className="entry-share btn-group share-buttons">
-            <a href="#">
-              <FontAwesomeIcon icon={faFacebookF} />
-            </a>
+            {userCreated?.facebook && (
+              <a
+                href={userCreated.facebook}
+                title={`Follow ${userCreated.fullname} on Facebook`}
+              >
+                <FontAwesomeIcon icon={faFacebookF} />
+              </a>
+            )}
 
-            <a href="#">
-              <i className="fab fa-twitter"></i>
-              <FontAwesomeIcon icon={faGithub} />
-            </a>
+            {userCreated?.github && (
+              <a
+                href={userCreated.github}
+                title={`Follow ${userCreated.fullname} on Github`}
+              >
+                <FontAwesomeIcon icon={faGithub} />
+              </a>
+            )}
 
-            <a href="#">
-              <FontAwesomeIcon icon={faLinkedinIn} />
-            </a>
+            {userCreated?.twitter && (
+              <a
+                href={userCreated.twitter}
+                title={`Follow ${userCreated.fullname} on Twitter`}
+              >
+                <FontAwesomeIcon icon={faTwitter} />
+              </a>
+            )}
+
+            {userCreated?.linkedin && (
+              <a
+                href={userCreated.linkedin}
+                title={`Follow ${userCreated.fullname} on LinkedIn`}
+              >
+                <FontAwesomeIcon icon={faLinkedinIn} />
+              </a>
+            )}
           </div>
         </div>
 

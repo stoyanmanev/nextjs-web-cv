@@ -2,14 +2,14 @@ import { Skill } from "../../interfaces/Skill";
 import ResumeSkillsItem from "./ResumeSkillItem";
 
 interface Props {
-  skills: Skill[];
+  skills: any;
 }
 
 const ResumeSkillsList: React.FC<Props> = ({ skills }) => {
   return (
     <>
       {skills.length > 0 &&
-        skills.map((skill, i) => {
+        skills.map((skill: any, i: number) => {
           return (
             <div key={i} className="skill-container">
               <div className="block-title">

@@ -35,4 +35,4 @@ yarn-error.log*
 *.tsbuildinfo
 
 # template
-template.txt
+template and bugs.txt

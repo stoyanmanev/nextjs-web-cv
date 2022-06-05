@@ -7,7 +7,6 @@ interface Props {
 }
 
 const HeaderItem: React.FC<Props> = ({ user }) => {
-  console.log(user.img)
   return (
     <>
       {user.img && <div className="header-photo">

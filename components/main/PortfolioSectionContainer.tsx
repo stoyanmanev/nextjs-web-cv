@@ -36,7 +36,6 @@ const PortfolioSectionContainer: React.FC<Props> = ({ userID }) => {
     );
   }
 
-  console.log(data);
 
   return (
     <div data-id="portfolio" className="animated-section section-active">

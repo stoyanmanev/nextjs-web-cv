@@ -6,6 +6,10 @@ import SettingsForm from "./SettingsForm";
 import EditableFieldTextArea from "../EditableFieldTextArea";
 import SettingsFactsContainer from "./SettingsFactsContainer";
 import SettingsBlogList from "./SettingsBlogList";
+import EditableFieldContainer from "../EditableFieldContainer";
+import EditableObjectContainer from "../EditableObjectContainer";
+import SettingsPathList from "./SettingsPathList";
+import SessionSocialSettings from "./SessionSocialSettings";
 
 interface Props {
   user: User;
@@ -17,14 +21,46 @@ const SessionAdvanceSetting: React.FC<Props> = ({ user, setUser, refetch }) => {
   const [editableAreaBio, setEditableAreaBio] = useState(false);
   const [profileBio, setProfileBio] = useState(user.description);
 
+  const [editableAreaCV, setEditableAreaCV] = useState(false);
+  const [profileCV, setProfileCV] = useState(user.cv);
+
   const editableInput = (
     prop: any,
     type: string,
     setProp: (type: string) => void,
-    setPropArea: (type: boolean) => void
+    setPropArea: (type: boolean) => void,
+    inputType?: string,
+    objectType?: string,
   ) => {
+    if(inputType){
+      return (
+        <EditableFieldTextArea
+          prop={prop}
+          type={type}
+          userId={user._id}
+          setProp={setProp}
+          setPropArea={setPropArea}
+          setUser={setUser}
+        />
+      );
+    }
+
+    if(objectType){
+      return (
+        <EditableObjectContainer
+          prop={prop}
+          type={type}
+          objectKey={objectType}
+          userId={user._id}
+          setProp={setProp}
+          setPropArea={setPropArea}
+          setUser={setUser}
+        />
+      );
+    }
+
     return (
-      <EditableFieldTextArea
+      <EditableFieldContainer
         prop={prop}
         type={type}
         userId={user._id}
@@ -59,7 +95,7 @@ const SessionAdvanceSetting: React.FC<Props> = ({ user, setUser, refetch }) => {
   return (
     <>
       <div className="setting-type portfolio-edit">
-        <span className="setting-block-settings">Portfolio Settings</span>
+        <span className="setting-block-settings">Portfolio Module Settings</span>
         <SettingsPortfolioList user={user} />
       </div>
       <div className="setting-type">
@@ -70,6 +106,7 @@ const SessionAdvanceSetting: React.FC<Props> = ({ user, setUser, refetch }) => {
         <span className="me-3">Contact Form: </span>
         <SettingsForm user={user} setUser={setUser} />
       </div>
+      <SessionSocialSettings user={user} setUser={setUser}/>
       <div className="setting-type">
         <span className="me-3">Bio: </span>
         {!editableAreaBio
@@ -78,7 +115,19 @@ const SessionAdvanceSetting: React.FC<Props> = ({ user, setUser, refetch }) => {
               profileBio,
               "description",
               setProfileBio,
-              setEditableAreaBio
+              setEditableAreaBio,
+              'textarea'
+            )}
+      </div>
+      <div className="setting-type">
+        <span className="me-3">Your CV Link: </span>
+        {!editableAreaCV
+          ? notEditable(profileCV, setEditableAreaCV)
+          : editableInput(
+              profileCV,
+              "cv",
+              setProfileCV,
+              setEditableAreaCV,
             )}
       </div>
       <div className="setting-type fact-edit">
@@ -86,8 +135,12 @@ const SessionAdvanceSetting: React.FC<Props> = ({ user, setUser, refetch }) => {
         <SettingsFactsContainer user={user} refetch={refetch}/>
       </div>
       <div className="setting-type portfolio-edit">
-        <span className="setting-block-settings">Blog Settings</span>
+        <span className="setting-block-settings">Blog Module Settings</span>
         <SettingsBlogList user={user} />
+      </div>
+      <div className="setting-type path-edit">
+        <span className="setting-block-settings">Personal Path Settings</span>
+        <SettingsPathList user={user} refetch={refetch}/>
       </div>
     </>
   );

@@ -16,8 +16,8 @@ const HeaderContainer: React.FC<Props> = ({ user }) => {
         <HeaderItem user={user} />
       </div>
       <MainMenuContainer />
-      {/* {user?.social && <SocialLinksContainer social={user.social} />} */}
-      {/* {user?.documents && <HeaderButtonsContainer documents={user.documents} />} */}
+      <SocialLinksContainer user={user} />
+      {user?.cv && <HeaderButtonsContainer cv={user.cv} />}
       <CopyrightsContainer />
     </header>
   );

@@ -1,5 +1,5 @@
 import { Col } from "react-bootstrap";
-import { PersonalPath } from "../../interfaces/PersonalPath";
+import { PersonalPath } from "../../generated/graphql";
 import ResumePeaceList from "./ResumePeaceList";
 
 interface Props {

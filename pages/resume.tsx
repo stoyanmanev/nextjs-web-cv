@@ -1,11 +1,24 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useEffect, useState } from "react";
 import HeaderContainer from "../components/HeaderContainer";
 import ResumeSectionContainer from "../components/main/ResumeSectionContainer";
-import { user } from "../db/user";
-import { User } from "../interfaces/User";
+import { useCurrentUserQuery, User } from "../generated/graphql";
 
 const Resume: NextPage = () => {
+
+  const [user, setUser] = useState<User>()
+  const {data} = useCurrentUserQuery<any>({}, {
+    refetchOnWindowFocus: false
+  })
+
+  useEffect(() => {
+    if(data?.currentUser){
+      setUser(data.currentUser);
+    }
+  }, [data])
+
+
   const componetForRendering = (user: User) => {
     if (user.personalPath && user.abilities) {
       return (
@@ -17,7 +30,7 @@ const Resume: NextPage = () => {
     } else if (user.personalPath && !user.abilities) {
       return <ResumeSectionContainer paths={user.personalPath} />;
     } else {
-      return <ResumeSectionContainer abilities={user.abilities} />;
+      return user.abilities && <ResumeSectionContainer abilities={user.abilities} />;
     }
   };
 
@@ -33,11 +46,11 @@ const Resume: NextPage = () => {
         <div className="lm-bg"></div>
         <div className="page">
           <div className="page-content">
-            <HeaderContainer user={user} />
+            {user && <HeaderContainer user={user} />}
             <main>
               <div className="content-area">
                 <div className="animated-sections">
-                  {componetForRendering(user)}
+                  {user && componetForRendering(user)}
                 </div>
               </div>
             </main>

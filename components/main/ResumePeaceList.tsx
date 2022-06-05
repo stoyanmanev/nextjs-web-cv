@@ -1,8 +1,8 @@
 import { Col } from "react-bootstrap";
-import { Pieces } from "../../interfaces/Pieces";
+import { Piece } from "../../generated/graphql";
 
 interface Props {
-  pieces: Pieces[];
+  pieces: Piece[];
 }
 
 const ResumePathList: React.FC<Props> = ({ pieces }) => {

@@ -35,28 +35,27 @@ export type CreateUserInput = {
   password: Scalars['String'];
 };
 
-export type Document = {
-  __typename?: 'Document';
-  _id: Scalars['ObjectId'];
-  cv?: Maybe<Scalars['String']>;
-};
-
 export type EditUserInput = {
   address?: InputMaybe<Scalars['String']>;
   age?: InputMaybe<Scalars['String']>;
   blog?: InputMaybe<Array<NewsInput>>;
+  cv?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
+  facebook?: InputMaybe<Scalars['String']>;
   facts?: InputMaybe<Array<FactInput>>;
   form?: InputMaybe<Scalars['Boolean']>;
   fullname?: InputMaybe<Scalars['String']>;
+  github?: InputMaybe<Scalars['String']>;
   googleIframe?: InputMaybe<Scalars['String']>;
   img?: InputMaybe<Scalars['String']>;
+  linkedin?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
   personalPath?: InputMaybe<Array<PersonalPathInput>>;
   phone?: InputMaybe<Scalars['String']>;
   position?: InputMaybe<Scalars['String']>;
   residence?: InputMaybe<Scalars['String']>;
+  twitter?: InputMaybe<Scalars['String']>;
 };
 
 export type Fact = {
@@ -161,7 +160,6 @@ export type PersonalPathInput = {
 
 export type Piece = {
   __typename?: 'Piece';
-  _id: Scalars['ObjectId'];
   description?: Maybe<Scalars['String']>;
   location?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
@@ -223,20 +221,24 @@ export type User = {
   abilities?: Maybe<Array<Abilities>>;
   address?: Maybe<Scalars['String']>;
   age?: Maybe<Scalars['String']>;
+  cv?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
-  documents?: Maybe<Array<Document>>;
   email: Scalars['String'];
+  facebook?: Maybe<Scalars['String']>;
   facts?: Maybe<Array<Fact>>;
   form?: Maybe<Scalars['Boolean']>;
   fullname: Scalars['String'];
+  github?: Maybe<Scalars['String']>;
   googleIframe?: Maybe<Scalars['String']>;
   img?: Maybe<Scalars['String']>;
+  linkedin?: Maybe<Scalars['String']>;
   password: Scalars['String'];
   personalPath?: Maybe<Array<PersonalPath>>;
   phone?: Maybe<Scalars['String']>;
   position?: Maybe<Scalars['String']>;
   residence?: Maybe<Scalars['String']>;
   roles?: Maybe<Array<Scalars['String']>>;
+  twitter?: Maybe<Scalars['String']>;
 };
 
 export type NewsesQueryVariables = Exact<{ [key: string]: never; }>;
@@ -301,12 +303,12 @@ export type UserQueryVariables = Exact<{
 }>;
 
 
-export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, form?: boolean | null, description?: string | null, documents?: Array<{ __typename?: 'Document', cv?: string | null }> | null, facts?: Array<{ __typename?: 'Fact', _id: string, name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null } };
+export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, form?: boolean | null, facebook?: string | null, linkedin?: string | null, twitter?: string | null, github?: string | null, description?: string | null, cv?: string | null, facts?: Array<{ __typename?: 'Fact', _id: string, name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null } };
 
 export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, form?: boolean | null, description?: string | null, documents?: Array<{ __typename?: 'Document', cv?: string | null }> | null, facts?: Array<{ __typename?: 'Fact', _id: string, name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null } };
+export type CurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, form?: boolean | null, facebook?: string | null, linkedin?: string | null, twitter?: string | null, github?: string | null, description?: string | null, cv?: string | null, facts?: Array<{ __typename?: 'Fact', _id: string, name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null } };
 
 export type CreateUserMutationVariables = Exact<{
   data: CreateUserInput;
@@ -328,7 +330,7 @@ export type EditUserMutationVariables = Exact<{
 }>;
 
 
-export type EditUserMutation = { __typename?: 'Mutation', editUser: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, form?: boolean | null, description?: string | null, documents?: Array<{ __typename?: 'Document', cv?: string | null }> | null, facts?: Array<{ __typename?: 'Fact', _id: string, name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null } };
+export type EditUserMutation = { __typename?: 'Mutation', editUser: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, facebook?: string | null, linkedin?: string | null, twitter?: string | null, github?: string | null, form?: boolean | null, description?: string | null, cv?: string | null, facts?: Array<{ __typename?: 'Fact', _id: string, name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null } };
 
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
@@ -562,10 +564,13 @@ export const UserDocument = `
     googleIframe
     age
     form
+    facebook
+    linkedin
+    twitter
+    github
+    facebook
     description
-    documents {
-      cv
-    }
+    cv
     facts {
       _id
       name
@@ -614,10 +619,12 @@ export const CurrentUserDocument = `
     googleIframe
     age
     form
+    facebook
+    linkedin
+    twitter
+    github
     description
-    documents {
-      cv
-    }
+    cv
     facts {
       _id
       name
@@ -701,11 +708,13 @@ export const EditUserDocument = `
     address
     googleIframe
     age
+    facebook
+    linkedin
+    twitter
+    github
     form
     description
-    documents {
-      cv
-    }
+    cv
     facts {
       _id
       name
