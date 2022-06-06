@@ -9,6 +9,7 @@ import {
   useNewsesQuery,
   User,
 } from "../../generated/graphql";
+import Loader from "../LoaderContainer";
 
 interface Props {
   user: User;
@@ -45,7 +46,7 @@ const SettingsBlogList: React.FC<Props> = ({ user }) => {
   }, [data]);
 
   if (isLoading) {
-    return <>Loading...</>;
+    return <Loader />
   }
 
   if (isError) {

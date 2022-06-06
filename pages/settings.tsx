@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { useState, useEffect } from "react";
 import HeaderContainer from "../components/HeaderContainer";
+import Loader from "../components/LoaderContainer";
 import SettingsContainer from "../components/main/SettingsContainer";
 import { useCurrentUserQuery, User } from "../generated/graphql";
 
@@ -20,9 +21,7 @@ const Settings: NextPage = () => {
 
   if (isLoading) {
     return (
-      <div>
-        <span>Loading...</span>
-      </div>
+      <Loader />
     );
   }
 

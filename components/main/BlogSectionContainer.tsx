@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import { News, useNewsesQuery, User } from "../../generated/graphql";
+import Loader from "../LoaderContainer";
 import BlogList from "./BlogList";
 
 interface Props {
@@ -24,9 +25,7 @@ const BlogSectionContainer: React.FC<Props> = ({ user }) => {
 
   if (isLoading) {
     return (
-      <div>
-        <span>Loading...</span>
-      </div>
+      <Loader />
     );
   }
 

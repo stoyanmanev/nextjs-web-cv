@@ -1,9 +1,9 @@
-import { faArrowsRotate, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faArrowsRotate, faCheck, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FormEvent, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { toast } from "react-toastify";
-import { Fact, useEditUserMutation, User } from "../../generated/graphql";
+import { PersonalPathInput, Piece, useEditUserMutation, User } from "../../generated/graphql";
 import { v4 as uuid_v4 } from "uuid";
 import PathFormAutomaticsFields from "./PathFormAutomaticsFields";
 
@@ -21,7 +21,8 @@ const PathFormItem: React.FC<Props> = ({
   user,
 }) => {
   const [headline, setHeadline] = useState<string>("");
-  const [autoFields, setAutoFields] = useState<number>(1);
+  const [generatedFields, setGeneratedFields] = useState<number>(0);
+  const [generatedValue, setGeneratedValue] = useState<any>({});
   const isContentPreset = headline !== "";
   const { mutate } = useEditUserMutation({
     onSuccess: (data) => {
@@ -36,22 +37,60 @@ const PathFormItem: React.FC<Props> = ({
     },
   });
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!isContentPreset) return false;
-    const _id = uuid_v4();
-    // user.facts && user.facts.push({ _id, name, value: v });
-    const collect: any = user.facts;
-    // await mutate({ id: user._id, data: { facts: collect } });
+    const pieces: Array<any> = [];
+    Object.values(generatedValue).forEach(item => pieces.push(item));
+    console.log(Object.values(pieces))
+    const personalPathObject: any = {
+      _id: uuid_v4(),
+      headline,
+      pieces
+    }
+    user.personalPath && user.personalPath.push(personalPathObject);
+    
+    user.personalPath && mutate({id: user._id, data: {
+      personalPath: user.personalPath
+    }})
+  };
+
+  const renderGeneratedFields = () => {
+    const componentsList = [];
+    for (let i = 0; i < generatedFields; i++) {
+      componentsList.push(
+        <PathFormAutomaticsFields
+          key={i}
+          setGeneratedValue={setGeneratedValue}
+          generatedValue={generatedValue}
+          numberContainer={i}
+        />
+      );
+    }
+    return componentsList.map((item) => item);
+  };
+
+  const incrementGeneratedFields = () => {
+    const fields = generatedFields + 1;
+    setGeneratedFields(fields);
+  };
+
+  const decrementGeneratedFields = () => {
+    if (generatedFields < 1) return false;
+    const fields = generatedFields - 1;
+    delete generatedValue[fields];
+    const filterObject = generatedValue[fields];
+    setGeneratedFields(filterObject);
+    setGeneratedFields(fields);
   };
 
   const handleReset = () => {
     setHeadline("");
-
+    setGeneratedFields(0)
+    setGeneratedValue({})
   };
 
   return (
-    <Form onSubmit={(e) => handleSubmit(e)}>
+    <Form onSubmit={(e) => submitHandler(e)} className="auto-generated-fields-form">
       <Row>
         <Col sm={12}>
           <Form.Control
@@ -62,7 +101,21 @@ const PathFormItem: React.FC<Props> = ({
           />
         </Col>
         <Col sm={12}>
-          <PathFormAutomaticsFields />
+          {renderGeneratedFields()}
+          <div className="generated-btns">
+              <Button
+                className="increment-fields"
+                onClick={() => decrementGeneratedFields()}
+              >
+                <FontAwesomeIcon icon={faMinus} />
+              </Button>
+              <Button
+                className="increment-fields"
+                onClick={() => incrementGeneratedFields()}
+              >
+                <FontAwesomeIcon icon={faPlus} />
+              </Button>
+            </div>
         </Col>
       </Row>
       <Row>

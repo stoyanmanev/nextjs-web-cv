@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import ModalPortfolio from "../ModalPortfolio";
+import Loader from "../LoaderContainer";
 
 interface Props {
   user: User;
@@ -47,7 +48,7 @@ const SettingsPortfolioList: React.FC<Props> = ({ user }) => {
   }, [data]);
 
   if (isLoading) {
-    return <span>Loading...</span>;
+    return <Loader />;
   }
 
   if (isError) {

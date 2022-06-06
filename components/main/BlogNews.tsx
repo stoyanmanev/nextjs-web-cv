@@ -12,6 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { News, User, useUserQuery } from "../../generated/graphql";
 import { useEffect, useState } from "react";
+import Loader from "../LoaderContainer";
 
 interface Props {
   user: User;
@@ -35,7 +36,7 @@ const BlogNews: React.FC<Props> = ({ user, news, setIsViewNews }) => {
   }, [data]);
 
   const createdUsername = () => {
-    if (isLoading) return <>Loading...</>;
+    if (isLoading) return <Loader />;
     if (isError) return <>Something went wrong</>;
     if (userCreated) return <>{userCreated.fullname}</>;
   };

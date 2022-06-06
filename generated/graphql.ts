@@ -148,12 +148,13 @@ export type NewsInput = {
 
 export type PersonalPath = {
   __typename?: 'PersonalPath';
-  _id: Scalars['ObjectId'];
+  _id: Scalars['String'];
   headline?: Maybe<Scalars['String']>;
   pieces: Array<Piece>;
 };
 
 export type PersonalPathInput = {
+  _id: Scalars['String'];
   headline: Scalars['String'];
   pieces: Array<PieceInput>;
 };
@@ -303,12 +304,12 @@ export type UserQueryVariables = Exact<{
 }>;
 
 
-export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, form?: boolean | null, facebook?: string | null, linkedin?: string | null, twitter?: string | null, github?: string | null, description?: string | null, cv?: string | null, facts?: Array<{ __typename?: 'Fact', _id: string, name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null } };
+export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, form?: boolean | null, facebook?: string | null, linkedin?: string | null, twitter?: string | null, github?: string | null, description?: string | null, cv?: string | null, facts?: Array<{ __typename?: 'Fact', _id: string, name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', _id: string, headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null } };
 
 export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, form?: boolean | null, facebook?: string | null, linkedin?: string | null, twitter?: string | null, github?: string | null, description?: string | null, cv?: string | null, facts?: Array<{ __typename?: 'Fact', _id: string, name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null } };
+export type CurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, form?: boolean | null, facebook?: string | null, linkedin?: string | null, twitter?: string | null, github?: string | null, description?: string | null, cv?: string | null, facts?: Array<{ __typename?: 'Fact', _id: string, name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', _id: string, headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null } };
 
 export type CreateUserMutationVariables = Exact<{
   data: CreateUserInput;
@@ -330,7 +331,7 @@ export type EditUserMutationVariables = Exact<{
 }>;
 
 
-export type EditUserMutation = { __typename?: 'Mutation', editUser: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, facebook?: string | null, linkedin?: string | null, twitter?: string | null, github?: string | null, form?: boolean | null, description?: string | null, cv?: string | null, facts?: Array<{ __typename?: 'Fact', _id: string, name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null } };
+export type EditUserMutation = { __typename?: 'Mutation', editUser: { __typename?: 'User', _id: any, fullname: string, email: string, password: string, position?: string | null, img?: string | null, phone?: string | null, residence?: string | null, address?: string | null, googleIframe?: string | null, age?: string | null, facebook?: string | null, linkedin?: string | null, twitter?: string | null, github?: string | null, form?: boolean | null, description?: string | null, cv?: string | null, facts?: Array<{ __typename?: 'Fact', _id: string, name: string, value?: number | null }> | null, personalPath?: Array<{ __typename?: 'PersonalPath', _id: string, headline?: string | null, pieces: Array<{ __typename?: 'Piece', year?: string | null, location?: string | null, type?: string | null, description?: string | null }> }> | null, abilities?: Array<{ __typename?: 'Abilities', knowledges: Array<string>, skills: Array<string> }> | null } };
 
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
@@ -577,6 +578,7 @@ export const UserDocument = `
       value
     }
     personalPath {
+      _id
       headline
       pieces {
         year
@@ -631,6 +633,7 @@ export const CurrentUserDocument = `
       value
     }
     personalPath {
+      _id
       headline
       pieces {
         year
@@ -721,6 +724,7 @@ export const EditUserDocument = `
       value
     }
     personalPath {
+      _id
       headline
       pieces {
         year

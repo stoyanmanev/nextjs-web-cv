@@ -23,6 +23,9 @@ const ModalPath: React.FC<Props> = ({
     setShowModal(false);
   };
 
+
+  
+
   return (
     <div className={`modal-container ${isModalOpen && "modal-open"}`}>
       <div className="modal-content">

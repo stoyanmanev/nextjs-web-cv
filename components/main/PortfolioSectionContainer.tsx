@@ -1,6 +1,7 @@
 import Image from "next/image";
 import {useState, useEffect} from 'react'
 import { usePortfoliosQuery } from "../../generated/graphql";
+import Loader from "../LoaderContainer";
 
 interface Props {
   userID: string;
@@ -22,6 +23,10 @@ const PortfolioSectionContainer: React.FC<Props> = ({ userID }) => {
     );
     setUserPortfolioList(portfioFilteredList);
   }, [data]);
+
+  if(isLoading){
+    return <Loader />
+  }
 
   if (userPortfolioList?.length === 0) {
     return (
