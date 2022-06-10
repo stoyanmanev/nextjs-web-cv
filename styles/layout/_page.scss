@@ -189,6 +189,7 @@ main {
     }
   }
   .animated-sections {
+    height: 100%;
     .animated-section {
       position: absolute;
       background-color: #222;
@@ -1712,6 +1713,10 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+  .animated-sections &{
+    height: 100%;
+    width: 100%;
+  }
   .loader-wrapper {
     width: 60px;
     height: 60px;

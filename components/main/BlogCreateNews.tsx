@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft} from "@fortawesome/free-solid-svg-icons";
 import { News, useCreateNewsMutation, User } from "../../generated/graphql";
+import Loader from "../LoaderContainer";
 
 interface Props {
   user: User;
@@ -19,6 +20,7 @@ const BlogCreateNews: React.FC<Props> = ({ user, setBlog, refetch, setIsCreateNe
   const [description, setDescription] = useState<string>("");
   const [keywords, setKeywords] = useState<string>("");
   const [file, setFile] = useState<any>("");
+  const [loading, setLoading] = useState<boolean>(false)
 
   const isContentPreset =
     title !== "" && category !== "" && description !== "" && file !== "";
@@ -26,10 +28,12 @@ const BlogCreateNews: React.FC<Props> = ({ user, setBlog, refetch, setIsCreateNe
   const { mutate } = useCreateNewsMutation({
     onSuccess: () => {
       refetch();
+      setLoading(false)
       toast.info(`The news was created successfully`);
     },
     onError: (err: any) => {
       const errorMsg = String(err).split(":")[1];
+      setLoading(false)
       toast.error(`${errorMsg}`);
     },
   });
@@ -61,6 +65,7 @@ const BlogCreateNews: React.FC<Props> = ({ user, setBlog, refetch, setIsCreateNe
     e.preventDefault();
     const keywordsToArray = keywords.split(",").filter((word) => word.trim() !== "").map(word => word.trim());
     if (!isContentPreset) return false;
+    setLoading(true);
     const isUploaded = await uploadImage(); // isUploaded if is success return url path to image
     if (isUploaded) {
       await mutate({
@@ -73,9 +78,16 @@ const BlogCreateNews: React.FC<Props> = ({ user, setBlog, refetch, setIsCreateNe
         },
       });
     } else {
+      setLoading(false);
       toast.error(`Image uploaded failed`);
     }
   };
+
+  if(loading === true){
+    return(
+      <Loader />
+    )
+  }
 
   return (
     <div className="blog-form-container">

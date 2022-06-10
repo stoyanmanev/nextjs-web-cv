@@ -1,4 +1,5 @@
 import {
+  faArrowRightFromBracket,
   faBook,
   faEnvelope,
   faGear,
@@ -10,8 +11,27 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Navbar, Container } from "react-bootstrap";
 import Link from "next/link";
+import { Cookies } from "react-cookie";
+import { User } from "../generated/graphql";
 
-const MainMenuContainer: React.FC = () => {
+interface Props {
+  setToken: (type: string) => void;
+  setUser: (type: User) => void;
+}
+
+const MainMenuContainer: React.FC<Props> = ({ setToken, setUser }) => {
+  const logout = async() => {
+    const cookie = new Cookies();
+    cookie.remove("token");
+    await setToken("");
+    await  setUser({
+      _id: undefined,
+      email: "",
+      fullname: "",
+      password: "",
+    });
+  };
+
   return (
     <Navbar variant="dark">
       <Container>
@@ -79,6 +99,13 @@ const MainMenuContainer: React.FC = () => {
               <span className="link-text">Settings</span>
             </div>
           </Link>
+          <div onClick={() => logout()} className="link">
+            <FontAwesomeIcon
+              icon={faArrowRightFromBracket}
+              className="menu-icon lnr lnr-settings"
+            />
+            <span className="link-text">Logout</span>
+          </div>
         </div>
       </Container>
     </Navbar>

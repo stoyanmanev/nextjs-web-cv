@@ -19,12 +19,12 @@ const ResumeSectionContainer: React.FC<Props> = ({ paths, abilities }) => {
       <Container className="section-content">
         <Row>
           {paths && paths.length > 0 && (
-            <Col xs={12} sm={7}>
+            <Col xs={12} sm={12}>
               <ResumePathList paths={paths} />
             </Col>
           )}
           {abilities && Object.entries(abilities).length > 0 && (
-            <Col xs={12} sm={5}>
+            <Col xs={12} sm={12}>
               <div className="design-skills-container">
                 {abilities.map((abillity) => {
                   return (

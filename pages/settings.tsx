@@ -1,12 +1,14 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useState, useEffect } from "react";
+import AuthTemplate from "../components/auth/AuthTemplate";
 import HeaderContainer from "../components/HeaderContainer";
 import Loader from "../components/LoaderContainer";
 import SettingsContainer from "../components/main/SettingsContainer";
 import { useCurrentUserQuery, User } from "../generated/graphql";
 
 const Settings: NextPage = () => {
+  const [token, setToken] = useState("");
   const [user, setUser] = useState<User>()
   const { isLoading, isError, data, error, refetch } = useCurrentUserQuery<any>(
     {},
@@ -25,12 +27,9 @@ const Settings: NextPage = () => {
     );
   }
 
-  if (isError) {
-    const msg = String(error);
+  if (isError || user?._id === undefined) {
     return (
-      <div>
-        <p>{msg}</p>
-      </div>
+      <AuthTemplate setUser={setUser} setToken={setToken} />
     );
   }
 
@@ -46,7 +45,7 @@ const Settings: NextPage = () => {
         <div className="lm-bg"></div>
         <div className="page">
           <div className="page-content">
-            {user && <HeaderContainer user={user} />}
+            {user && <HeaderContainer user={user} setUser={setUser} setToken={setToken}/>}
             <main>
               <div className="content-area">
                 <div className="animated-sections">

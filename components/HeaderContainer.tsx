@@ -7,15 +7,17 @@ import { User } from "../generated/graphql";
 
 interface Props {
   user: User;
+  setToken: (type: string) => void
+  setUser: (type: User) => void
 }
 
-const HeaderContainer: React.FC<Props> = ({ user }) => {
+const HeaderContainer: React.FC<Props> = ({ user, setToken, setUser }) => {
   return (
     <header id="site_header" className="header">
       <div className="header-content">
         <HeaderItem user={user} />
       </div>
-      <MainMenuContainer />
+      <MainMenuContainer setToken={setToken} setUser={setUser}/>
       <SocialLinksContainer user={user} />
       {user?.cv && <HeaderButtonsContainer cv={user.cv} />}
       <CopyrightsContainer />

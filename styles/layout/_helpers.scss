@@ -20,6 +20,9 @@
     cursor: not-allowed;
     background-color: $alert;
     border-color: $alert;
+    &:focus{
+      box-shadow: 0 0 0 0.25rem rgba(#c91414, .56) !important;
+    }
   }
 }
 
